@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: serif; }
+        .bg { position: fixed; inset: -10%; background: url('princess.jpg') center/cover; filter: brightness(0.3) blur(5px); z-index: -1; animation: pan 20s infinite alternate; }
+        @keyframes pan { from { transform: scale(1.2); } to { transform: scale(1.4) translate(-2%, -2%); } }
+        .subtitle-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; text-align: center; color: white; }
+        .subtitle { font-size: 1.2rem; font-style: italic; opacity: 0; transition: opacity 1s; position: absolute; width: 100%; left: 0; }
+        .subtitle.active { opacity: 1; }
+        .flash { position: fixed; inset: 0; background: white; opacity: 0; pointer-events: none; z-index: 10; }
+        .flash-on { animation: flash 1.5s forwards; }
+        @keyframes flash { to { opacity: 1; } }
+        #start { color: white; border: 1px solid white; padding: 10px; border-radius: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="flash" id="flash"></div>
+    <audio id="heartbeat" loop><source src="heartbeat.mp3"></audio>
+    <div class="subtitle-container">
+        <div id="start" onclick="begin()">Tap to Begin</div>
+        <div id="text" class="subtitle"></div>
+    </div>
+
+<script>
+    const subs = ["In a world that never stops...", "Sometimes we forget to look back.", "Today is about the journey.", "Happy Birthday, Princess."];
+    let i = 0;
+    function begin() {
+        document.getElementById('start').style.display = 'none';
+        document.getElementById('heartbeat').play();
+        showNext();
+    }
+    function showNext() {
+        if(i < subs.length) {
+            const el = document.getElementById('text');
+            el.innerHTML = subs[i];
+            el.classList.add('active');
+            setTimeout(() => {
+                el.classList.remove('active');
+                setTimeout(() => { i++; showNext(); }, 1000);
+            }, 3000);
+        } else {
+            document.getElementById('flash').classList.add('flash-on');
+            setTimeout(() => { window.location.replace("login.html"); }, 1500);
+        }
+    }
+</script>
+</body>
+</html>
