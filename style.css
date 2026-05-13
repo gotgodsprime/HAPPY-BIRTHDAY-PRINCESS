@@ -104,3 +104,9 @@ h1{
 .secret{
   color:#ffcc70;
 }
+@keyframes float{
+  to{
+    transform:translateY(-120vh);
+    opacity:0;
+  }
+}
