@@ -1,0 +1,15 @@
+{
+  "name": "Princess Memory Film",
+  "short_name": "Princess",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#ff3366",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
