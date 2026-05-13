@@ -3,58 +3,205 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Princess — Memory Film 👑</title>
-
-<link rel="stylesheet" href="style.css"/>
 <link rel="manifest" href="manifest.json"/>
+<title>Princess — God Mode 👑</title>
+
+<style>
+body {
+  margin:0;
+  overflow:hidden;
+  background:black;
+  font-family: system-ui;
+  color:white;
+}
+
+/* 🎥 CINEMATIC VIDEO BG */
+video {
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(0.4) contrast(1.2);
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle,transparent,#000 70%);
+}
+
+/* 🔐 FACE ID SCREEN */
+#lock {
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  backdrop-filter:blur(10px);
+}
+
+.face {
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:2px solid white;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+/* 📱 APP */
+#app{
+  display:none;
+  height:100%;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+}
+
+/* 🧠 STORY SECTIONS */
+.section{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  scroll-snap-align:start;
+  padding:20px;
+  text-align:center;
+}
+
+h1{
+  font-size:28px;
+  background:linear-gradient(90deg,#ff3366,#6c63ff,#ffcc70);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* 💖 HEARTS */
+.heart{
+  position:absolute;
+  font-size:18px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* 🎛 CONTROL */
+#control{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+}
+
+button{
+  padding:10px 14px;
+  border:none;
+  border-radius:20px;
+  background:#ff3366;
+  color:white;
+}
+</style>
 </head>
 
 <body>
 
-<!-- 🌌 BACKGROUND -->
-<div class="bg"></div>
-<div class="dust"></div>
+<!-- 🎥 OPTIONAL VIDEO BACKGROUND -->
+<video autoplay muted loop>
+  <source src="https://cdn.pixabay.com/video/2023/02/27/152475-813780876_large.mp4" type="video/mp4"/>
+</video>
 
-<!-- 🎬 INTRO -->
-<div id="intro">
-  <h1>Princess</h1>
-  <p>Tap to enter memory archive</p>
-  <button onclick="start()">Enter</button>
+<div class="overlay"></div>
+
+<!-- 🔐 LOCK -->
+<div id="lock">
+  <div class="face"></div>
+  <h2>Face ID Required</h2>
+  <button onclick="unlock()">Authenticate</button>
 </div>
 
-<!-- 📱 STORY ENGINE -->
+<!-- 📱 APP -->
 <div id="app">
 
-  <section class="scene">
-    <h1>She was called Princess 👑</h1>
-    <p class="reveal">Some names stay even after people leave.</p>
-  </section>
+  <div class="section">
+    <h1>Princess 👑</h1>
+    <p>Some people don’t stay forever…</p>
+  </div>
 
-  <section class="scene">
-    <h1>Time passed.</h1>
-    <p class="reveal">But memory doesn’t follow time rules.</p>
-  </section>
+  <div class="section">
+    <h1>But moments do.</h1>
+    <p>And this one is yours.</p>
+  </div>
 
-  <section class="scene">
-    <h1>Happy Birthday 🎂</h1>
-    <p class="reveal">This is not a message. It’s a preserved moment.</p>
-  </section>
+  <div class="section">
+    <h1>Happy Birthday</h1>
+    <p>You were a chapter I never forgot.</p>
+  </div>
 
-  <section class="scene">
-    <h1>Final Memory</h1>
-    <p class="reveal secret">
-      If you reached here…  
-      it means you scrolled through everything that was left unsaid.
-    </p>
-  </section>
+  <div class="section" id="secret">
+    <h1>Hidden Ending</h1>
+    <p>Maybe some stories don’t need closure…</p>
+  </div>
 
 </div>
 
-<!-- 🎧 AUDIO -->
-<audio id="music" loop>
-  <source src="assets/bg.mp3" type="audio/mp3"/>
-</audio>
+<!-- 🎛 CONTROL -->
+<div id="control">
+  <button onclick="spawn()">💖</button>
+</div>
 
-<script src="app.js"></script>
+<script>
+
+/* 🔐 FAKE FACE ID */
+function unlock(){
+  document.getElementById("lock").style.display="none";
+  document.getElementById("app").style.display="block";
+  startHearts();
+}
+
+/* 💖 PARTICLES */
+function startHearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+  },400);
+}
+
+/* 💥 TAP EFFECT */
+function spawn(){
+  for(let i=0;i<10;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*100+"vh";
+    document.body.appendChild(h);
+  }
+}
+
+/* 🧠 SECRET ENDING TRIGGER */
+document.getElementById("secret").addEventListener("click",()=>{
+  alert("Some stories live forever in silence.");
+});
+
+</script>
+
 </body>
 </html>
