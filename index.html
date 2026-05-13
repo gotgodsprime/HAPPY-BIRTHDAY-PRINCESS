@@ -1,207 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="manifest" href="manifest.json"/>
-<title>Princess — God Mode 👑</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #d1d1d1;
+            --accent: #5e5e5e;
+        }
 
-<style>
-body {
-  margin:0;
-  overflow:hidden;
-  background:black;
-  font-family: system-ui;
-  color:white;
-}
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* 🎥 CINEMATIC VIDEO BG */
-video {
-  position:fixed;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:brightness(0.4) contrast(1.2);
-}
+        /* Cinematic Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
 
-/* OVERLAY */
-.overlay{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:radial-gradient(circle,transparent,#000 70%);
-}
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            filter: grayscale(40%) brightness(0.6);
+            transition: opacity 3s ease-in-out, transform 10s linear;
+        }
 
-/* 🔐 FACE ID SCREEN */
-#lock {
-  position:absolute;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  backdrop-filter:blur(10px);
-}
+        .slide.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
 
-.face {
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  border:2px solid white;
-  animation:pulse 2s infinite;
-}
+        /* Overlay Content */
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-  100%{transform:scale(1);}
-}
+        h1 {
+            font-weight: 300;
+            letter-spacing: 4px;
+            opacity: 0;
+            animation: fadeIn 4s forwards 1s;
+        }
 
-/* 📱 APP */
-#app{
-  display:none;
-  height:100%;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-}
+        p {
+            line-height: 1.8;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeIn 4s forwards 3s;
+        }
 
-/* 🧠 STORY SECTIONS */
-.section{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  scroll-snap-align:start;
-  padding:20px;
-  text-align:center;
-}
+        /* The Hidden Message */
+        .secret-trigger {
+            margin-top: 50px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #222; /* Barely visible */
+            transition: color 1s;
+            user-select: none;
+        }
 
-h1{
-  font-size:28px;
-  background:linear-gradient(90deg,#ff3366,#6c63ff,#ffcc70);
-  -webkit-background-clip:text;
-  color:transparent;
-}
+        .secret-trigger:hover {
+            color: #444;
+        }
 
-/* 💖 HEARTS */
-.heart{
-  position:absolute;
-  font-size:18px;
-  animation:float 6s linear infinite;
-}
+        #hidden-note {
+            display: none;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-top: 20px;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+        }
 
-@keyframes float{
-  0%{transform:translateY(100vh);opacity:0;}
-  50%{opacity:1;}
-  100%{transform:translateY(-10vh);opacity:0;}
-}
+        /* Music Toggle */
+        #music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 5px 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
 
-/* 🎛 CONTROL */
-#control{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:10px;
-}
-
-button{
-  padding:10px 14px;
-  border:none;
-  border-radius:20px;
-  background:#ff3366;
-  color:white;
-}
-</style>
+        @keyframes fadeIn {
+            to { opacity: 0.7; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- 🎥 OPTIONAL VIDEO BACKGROUND -->
-<video autoplay muted loop>
-  <source src="https://cdn.pixabay.com/video/2023/02/27/152475-813780876_large.mp4" type="video/mp4"/>
-</video>
+    <div class="slideshow">
+        <!-- REPLACE THESE URLS WITH YOUR ACTUAL IMAGE LINKS -->
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1501901642052-9621bf9923e2?q=80&w=2070');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1494972308805-463bc619d34e?q=80&w=2073');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1475483768296-6163e08872a1?q=80&w=2070');"></div>
+    </div>
 
-<div class="overlay"></div>
+    <div class="content">
+        <h1>MAY 13</h1>
+        <p>Time moves differently when we're looking back. <br> 
+           I hope your day is as quiet and beautiful as the memories I still keep.</p>
+        
+        <div class="secret-trigger" onclick="revealNote()">...</div>
+        <div id="hidden-note">I still look for your light in every room. Happy Birthday.</div>
+    </div>
 
-<!-- 🔐 LOCK -->
-<div id="lock">
-  <div class="face"></div>
-  <h2>Face ID Required</h2>
-  <button onclick="unlock()">Authenticate</button>
-</div>
+    <button id="music-btn" onclick="toggleMusic()">Play Audio</button>
+    
+    <!-- REPLACE THIS WITH A DIRECT LINK TO AN MP3 (Google Drive direct link or hosted file) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.chosic.com/wp-content/uploads/2021/04/Rainy-Day.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- 📱 APP -->
-<div id="app">
+    <script>
+        // Slideshow Logic
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
 
-  <div class="section">
-    <h1>Princess 👑</h1>
-    <p>Some people don’t stay forever…</p>
-  </div>
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
 
-  <div class="section">
-    <h1>But moments do.</h1>
-    <p>And this one is yours.</p>
-  </div>
+        setInterval(nextSlide, 6000);
 
-  <div class="section">
-    <h1>Happy Birthday</h1>
-    <p>You were a chapter I never forgot.</p>
-  </div>
+        // Music Logic
+        const music = document.getElementById('bg-music');
+        const btn = document.getElementById('music-btn');
 
-  <div class="section" id="secret">
-    <h1>Hidden Ending</h1>
-    <p>Maybe some stories don’t need closure…</p>
-  </div>
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                btn.innerText = "Mute";
+            } else {
+                music.pause();
+                btn.innerText = "Play Audio";
+            }
+        }
 
-</div>
-
-<!-- 🎛 CONTROL -->
-<div id="control">
-  <button onclick="spawn()">💖</button>
-</div>
-
-<script>
-
-/* 🔐 FAKE FACE ID */
-function unlock(){
-  document.getElementById("lock").style.display="none";
-  document.getElementById("app").style.display="block";
-  startHearts();
-}
-
-/* 💖 PARTICLES */
-function startHearts(){
-  setInterval(()=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    document.body.appendChild(h);
-  },400);
-}
-
-/* 💥 TAP EFFECT */
-function spawn(){
-  for(let i=0;i<10;i++){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.top=Math.random()*100+"vh";
-    document.body.appendChild(h);
-  }
-}
-
-/* 🧠 SECRET ENDING TRIGGER */
-document.getElementById("secret").addEventListener("click",()=>{
-  alert("Some stories live forever in silence.");
-});
-
-</script>
-
+        // Hidden Message Logic
+        function revealNote() {
+            const note = document.getElementById('hidden-note');
+            note.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
