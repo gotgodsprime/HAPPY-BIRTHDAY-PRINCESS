@@ -1,51 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Story...</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: serif; }
-        .bg { position: fixed; inset: -10%; background: url('princess.jpg') center/cover; filter: brightness(0.3) blur(5px); z-index: -1; animation: pan 20s infinite alternate; }
-        @keyframes pan { from { transform: scale(1.2); } to { transform: scale(1.4) translate(-2%, -2%); } }
-        .subtitle-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; text-align: center; color: white; }
-        .subtitle { font-size: 1.2rem; font-style: italic; opacity: 0; transition: opacity 1s; position: absolute; width: 100%; left: 0; }
-        .subtitle.active { opacity: 1; }
-        .flash { position: fixed; inset: 0; background: white; opacity: 0; pointer-events: none; z-index: 10; }
-        .flash-on { animation: flash 1.5s forwards; }
-        @keyframes flash { to { opacity: 1; } }
-        #start { color: white; border: 1px solid white; padding: 10px; border-radius: 20px; cursor: pointer; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Georgia', serif; }
+        .cinematic-bg { position: fixed; inset: -10%; background: url('princess.jpg') center/cover no-repeat; filter: brightness(0.3) saturate(0.8) blur(5px); z-index: -1; transform: scale(1.2); animation: moviePan 20s linear infinite alternate; }
+        @keyframes moviePan { from { transform: scale(1.2) translate(0, 0); } to { transform: scale(1.4) translate(-2%, -2%); } }
+        .vignette { position: fixed; inset: 0; box-shadow: inset 0 0 150px rgba(0,0,0,1); animation: pulseHeart 1.5s infinite ease-in-out; pointer-events: none; }
+        @keyframes pulseHeart { 0%, 100% { box-shadow: inset 0 0 150px rgba(0,0,0,1); } 50% { box-shadow: inset 0 0 180px rgba(139, 0, 0, 0.2); } }
+        .subtitle-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; text-align: center; }
+        .subtitle { color: rgba(255,255,255,0.9); font-size: 1.4rem; font-style: italic; letter-spacing: 2px; opacity: 0; transition: opacity 1.5s ease, filter 1.5s ease; filter: blur(10px); position: absolute; width: 100%; top: 0; left: 0; }
+        .subtitle.active { opacity: 1; filter: blur(0px); }
+        .flash-overlay { position: fixed; inset: 0; background: white; opacity: 0; pointer-events: none; z-index: 10000; }
+        .flash-trigger { animation: flashOut 2s forwards; }
+        @keyframes flashOut { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 1; } }
+        .start-prompt { color: white; font-size: 0.8rem; letter-spacing: 3px; cursor: pointer; opacity: 0.5; text-transform: uppercase; }
     </style>
 </head>
 <body>
-    <div class="bg"></div>
-    <div class="flash" id="flash"></div>
-    <audio id="heartbeat" loop><source src="heartbeat.mp3"></audio>
-    <div class="subtitle-container">
-        <div id="start" onclick="begin()">Tap to Begin</div>
-        <div id="text" class="subtitle"></div>
+    <div class="cinematic-bg"></div>
+    <div class="vignette"></div>
+    <div class="flash-overlay" id="flash"></div>
+    <audio id="heartbeat" loop><source src="heartbeat.mp3" type="audio/mpeg"></audio>
+    <div class="subtitle-container" id="subHolder">
+        <div class="start-prompt" id="startBtn">Tap to begin the story</div>
     </div>
 
 <script>
-    const subs = ["In a world that never stops...", "Sometimes we forget to look back.", "Today is about the journey.", "Happy Birthday, Princess."];
-    let i = 0;
-    function begin() {
-        document.getElementById('start').style.display = 'none';
-        document.getElementById('heartbeat').play();
-        showNext();
-    }
-    function showNext() {
-        if(i < subs.length) {
-            const el = document.getElementById('text');
-            el.innerHTML = subs[i];
-            el.classList.add('active');
-            setTimeout(() => {
-                el.classList.remove('active');
-                setTimeout(() => { i++; showNext(); }, 1000);
-            }, 3000);
-        } else {
-            document.getElementById('flash').classList.add('flash-on');
-            setTimeout(() => { window.location.replace("login.html"); }, 1500);
+const subs = ["In a world that never stops moving...", "Sometimes, we forget to look back.", "At the moments that defined us.", "At the people who stayed in our hearts.", "Even when the distance grew.", "Today isn't about the distance...", "It's about the journey."];
+const holder = document.getElementById("subHolder");
+const heartbeat = document.getElementById("heartbeat");
+const flash = document.getElementById("flash");
+let sequence = 0; let autoTimer;
+
+document.getElementById("startBtn").onclick = function() {
+    this.style.display = 'none';
+    heartbeat.volume = 0.4;
+    heartbeat.play();
+    startCinematic();
+};
+
+function startCinematic() {
+    renderScene();
+    document.body.onclick = () => {
+        if(sequence < subs.length - 1) {
+            clearTimeout(autoTimer);
+            sequence++;
+            renderScene();
         }
+    };
+}
+
+function renderScene() {
+    holder.innerHTML = "";
+    const el = document.createElement('div');
+    el.className = 'subtitle active';
+    el.innerText = subs[sequence];
+    holder.appendChild(el);
+    if (sequence < subs.length - 1) {
+        autoTimer = setTimeout(() => { sequence++; renderScene(); }, 4000);
+    } else {
+        setTimeout(() => {
+            flash.classList.add('flash-trigger');
+            setTimeout(() => { window.location.href = "login.html"; }, 1500);
+        }, 4000);
     }
+}
 </script>
 </body>
 </html>
