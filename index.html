@@ -3,32 +3,57 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Quantum Princess 👑</title>
+<title>Princess — Memory Film 👑</title>
 
 <link rel="stylesheet" href="style.css"/>
+<link rel="manifest" href="manifest.json"/>
 </head>
 
 <body>
 
+<!-- 🌌 BACKGROUND -->
 <div class="bg"></div>
+<div class="dust"></div>
 
-<div id="start">
-  <h1>Princess: Quantum Memory</h1>
-  <p>Every choice changes the story</p>
-  <button onclick="enter()">Begin</button>
+<!-- 🎬 INTRO -->
+<div id="intro">
+  <h1>Princess</h1>
+  <p>Tap to enter memory archive</p>
+  <button onclick="start()">Enter</button>
 </div>
 
+<!-- 📱 STORY ENGINE -->
 <div id="app">
 
-  <div id="scene" class="scene"></div>
+  <section class="scene">
+    <h1>She was called Princess 👑</h1>
+    <p class="reveal">Some names stay even after people leave.</p>
+  </section>
 
-  <div class="choices">
-    <button onclick="choose('peace')">Peace 🕊️</button>
-    <button onclick="choose('memory')">Memory 🌙</button>
-    <button onclick="choose('emotion')">Emotion 💔</button>
-  </div>
+  <section class="scene">
+    <h1>Time passed.</h1>
+    <p class="reveal">But memory doesn’t follow time rules.</p>
+  </section>
+
+  <section class="scene">
+    <h1>Happy Birthday 🎂</h1>
+    <p class="reveal">This is not a message. It’s a preserved moment.</p>
+  </section>
+
+  <section class="scene">
+    <h1>Final Memory</h1>
+    <p class="reveal secret">
+      If you reached here…  
+      it means you scrolled through everything that was left unsaid.
+    </p>
+  </section>
 
 </div>
+
+<!-- 🎧 AUDIO -->
+<audio id="music" loop>
+  <source src="assets/bg.mp3" type="audio/mp3"/>
+</audio>
 
 <script src="app.js"></script>
 </body>
