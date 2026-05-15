@@ -1,336 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>For Princess</title>
-    
-    <!-- PWA / iOS Web App Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="icon.png">
-    <link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Princess ❤️</title>
 
-    <style>
-        :root {
-            --ios-blue: #007aff;
-            --bg-dark: #000000;
-            --card-dark: #1c1c1e;
-        }
+<style>
+  :root {
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-glow: rgba(255, 255, 255, 0.4);
+  }
 
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg-dark);
-            color: white;
-            overflow: hidden;
-            height: 100vh;
-        }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #000;
+    color: white;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-        /* Status Bar Simulation */
-        #statusBar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 20px;
-            box-sizing: border-box;
-            font-size: 13px;
-            font-weight: 600;
-            z-index: 10000;
-        }
+  /* CINEMATIC INTRO */
+  .intro-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-weight: 200;
+    z-index: 9999;
+    animation: introOut 3s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    animation-delay: 1s;
+  }
 
-        /* Notification Styling */
-        #notification {
-            position: fixed;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            background: rgba(28, 28, 30, 0.9);
-            backdrop-filter: blur(20px);
-            padding: 15px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            z-index: 9999;
-            cursor: pointer;
-            animation: slideDown 0.5s ease-out;
-        }
+  @keyframes introOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
 
-        @keyframes slideDown {
-            from { transform: translate(-50%, -100px); }
-            to { transform: translate(-50%, 0); }
-        }
+  /* BACKGROUND DEPTH */
+  .bg-image {
+    position: fixed;
+    inset: -10%;
+    background: url('princess.jpg') center/cover no-repeat;
+    filter: blur(20px) brightness(0.3) saturate(1.2);
+    z-index: -2;
+    animation: slowPan 30s ease-in-out infinite alternate;
+  }
 
-        /* Screens */
-        .screen {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
+  @keyframes slowPan {
+    from { transform: scale(1) translateX(-2%); }
+    to { transform: scale(1.1) translateX(2%); }
+  }
 
-        #lock {
-            background: url('photos/lock.jpg') center/cover no-repeat;
-            display: block; /* Initial screen */
-        }
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85) 100%);
+    z-index: -1;
+  }
 
-        #passcode {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
-        }
+  /* CONTENT BOX */
+  .container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    animation: mainFadeIn 2.5s ease-out 2s forwards;
+  }
 
-        #keys {
-            display: grid;
-            grid-template-columns: repeat(3, 80px);
-            gap: 20px;
-            margin-top: 30px;
-        }
+  @keyframes mainFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-        .key {
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 300;
+    background: linear-gradient(to bottom, #fff, #b3b3b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
 
-        /* Chat Interface */
-        #chat {
-            flex-direction: column;
-            padding: 60px 20px 20px;
-            overflow-y: auto;
-        }
+  #typing {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    min-height: 1.5em;
+  }
 
-        .bubble {
-            padding: 10px 16px;
-            border-radius: 20px;
-            margin: 4px 0;
-            max-width: 75%;
-            font-size: 16px;
-            line-height: 1.4;
-        }
+  /* PREMIUM BUTTONS */
+  button {
+    margin-top: 30px;
+    padding: 14px 35px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    color: white;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-        .sent {
-            background: var(--ios-blue);
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
+  button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  }
 
-        /* Typing Dots */
-        .typing {
-            display: flex; gap: 4px; padding: 10px; align-self: flex-start;
-        }
-        .dot { width: 6px; height: 6px; background: #8e8e93; border-radius: 50%; animation: blink 1.4s infinite; }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
+  /* HIDDEN REVEAL */
+  .hidden {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(30px);
+    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  .show {
+    opacity: 1;
+    max-height: 1000px;
+    margin-top: 40px;
+    transform: translateY(0);
+  }
 
-        /* Secret Input */
-        #nameInput {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid white;
-            color: white;
-            text-align: center;
-            font-size: 18px;
-            outline: none;
-            margin-bottom: 20px;
-        }
-    </style>
+  .message-body {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: rgba(255,255,255,0.85);
+    white-space: pre-line;
+    max-width: 500px;
+  }
+</style>
 </head>
 <body>
 
-<div id="statusBar">
-    <span id="time">9:41</span>
-    <span id="battery">100% 🔋</span>
-</div>
+<div class="intro-screen">For Princess</div>
 
-<div id="notification">
-    <div style="background:var(--ios-blue); width:30px; height:30px; border-radius:7px; display:flex; justify-content:center; align-items:center;">💬</div>
-    <div>
-        <div style="font-weight:600; font-size:14px;">Messages</div>
-        <div style="font-size:13px; opacity:0.8;">Message for Princess</div>
+<div class="bg-image"></div>
+<div class="overlay"></div>
+
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+  <h1>Happy Birthday, Princess</h1>
+  <p id="typing"></p>
+
+  <button id="mainBtn" onclick="showMessage()">Tap to continue</button>
+
+  <div class="hidden" id="secret">
+    <div class="message-body">
+      I didn’t want today to pass without saying something…  
+
+      Not to reopen anything, not to complicate things,  
+      just to be honest for a moment.  
+
+      You were an important part of my life,  
+      and I will always respect that.  
+
+      I hope life is treating you kindly,  
+      and that you find happiness in ways that stay.  
+
+      Happy Birthday, Princess ❤️  
     </div>
+    <button onclick="goSecret()">There’s something else…</button>
+  </div>
 </div>
-
-<!-- Lock Screen -->
-<div id="lock" class="screen" onclick="openPasscode()"></div>
-
-<!-- Passcode Screen -->
-<div id="passcode" class="screen">
-    <h2 style="font-weight:400; margin-bottom:10px;">Enter Passcode</h2>
-    <div id="dots" style="letter-spacing:10px; font-size:24px; height:30px;"></div>
-    <div id="keys"></div>
-</div>
-
-<!-- Chat Screen -->
-<div id="chat" class="screen"></div>
-
-<!-- Slideshow Screen -->
-<div id="slides" class="screen">
-    <img id="slideImg" style="width:100%; height:100%; object-fit:cover;">
-</div>
-
-<!-- Secret Unlock -->
-<div id="secret" class="screen" style="justify-content:center; align-items:center; flex-direction:column;">
-    <input type="text" id="nameInput" placeholder="Who is this for?">
-    <button onclick="checkName()" style="background:none; border:1px solid white; color:white; padding:8px 20px; border-radius:20px;">Unlock</button>
-    <div id="secretText" style="margin-top:20px; font-style:italic; padding: 0 40px;"></div>
-</div>
-
-<audio id="music" src="music.mp3" loop></audio>
-<audio id="voice" src="voice.mp3"></audio>
 
 <script>
-    const state = {
-        input: "",
-        passcode: "1234",
-        messages: [
-            "Happy Birthday, Princess...",
-            "I didn’t want to just text you.",
-            "So I made this instead.",
-            "You mattered to me.",
-            "And in a quiet way… you still do.",
-            "I hope life is being kind to you.",
-            "That’s all."
-        ],
-        msgIndex: 0
-    };
+const text = "No pressure. No expectations. Just something small for you today.";
+let i = 0;
 
-    // Update Time
-    function updateClock() {
-        const d = new Date();
-        document.getElementById("time").innerText = d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 50);
+  }
+}
+setTimeout(typeWriter, 4000); // Wait for intro
 
-    // Flow Logic
-    const notification = document.getElementById('notification');
-    notification.onclick = () => {
-        notification.style.display = "none";
-    };
+function showMessage() {
+  document.getElementById("secret").classList.add("show");
+  document.getElementById("mainBtn").style.display = "none";
+}
 
-    function openPasscode() {
-        document.getElementById('lock').style.display = "none";
-        const pc = document.getElementById('passcode');
-        pc.style.display = "flex";
-        
-        const keysContainer = document.getElementById('keys');
-        keysContainer.innerHTML = "";
-        [1,2,3,4,5,6,7,8,9,0].forEach(n => {
-            const btn = document.createElement('div');
-            btn.className = "key";
-            btn.innerText = n;
-            btn.onclick = () => handlePress(n);
-            keysContainer.appendChild(btn);
-        });
-    }
+function goSecret() {
+  document.body.style.transition = "opacity 1.5s ease";
+  document.body.style.opacity = "0";
+  setTimeout(() => { window.location.href = "secret.html"; }, 1500);
+}
 
-    function handlePress(n) {
-        state.input += n;
-        document.getElementById('dots').innerText = "●".repeat(state.input.length);
-        
-        if(state.input.length === 4) {
-            if(state.input === state.passcode) {
-                startIntro();
-            } else {
-                state.input = "";
-                document.getElementById('dots').innerText = "";
-            }
-        }
-    }
+const music = document.getElementById("bgMusic");
+function fadeInMusic() {
+  music.play();
+  music.volume = 0;
+  let v = 0;
+  const t = setInterval(() => {
+    if (v < 0.6) { v += 0.02; music.volume = v; } 
+    else { clearInterval(t); }
+  }, 200);
+}
 
-    function startIntro() {
-        document.getElementById('passcode').style.display = "none";
-        const intro = document.createElement('div');
-        intro.style.cssText = "position:fixed; inset:0; display:flex; justify-content:center; align-items:center; background:black; font-size:24px; font-weight:200; transition: opacity 1s;";
-        intro.innerText = "For Princess...";
-        document.body.appendChild(intro);
-
-        setTimeout(() => {
-            intro.style.opacity = "0";
-            setTimeout(() => {
-                intro.remove();
-                startChat();
-            }, 1000);
-        }, 2000);
-    }
-
-    function startChat() {
-        document.getElementById('chat').style.display = "flex";
-        document.getElementById('music').play().catch(() => console.log("Audio requires user interaction first"));
-        sendNextMessage();
-    }
-
-    function sendNextMessage() {
-        const chat = document.getElementById('chat');
-        if(state.msgIndex < state.messages.length) {
-            // Typing indicator
-            const typing = document.createElement('div');
-            typing.className = "typing";
-            typing.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-            chat.appendChild(typing);
-            chat.scrollTop = chat.scrollHeight;
-
-            setTimeout(() => {
-                typing.remove();
-                const b = document.createElement('div');
-                b.className = "bubble sent";
-                b.innerText = state.messages[state.msgIndex];
-                chat.appendChild(b);
-                state.msgIndex++;
-                chat.scrollTop = chat.scrollHeight;
-                setTimeout(sendNextMessage, 1500);
-            }, 1000);
-        } else {
-            setTimeout(startSlides, 2500);
-        }
-    }
-
-    function startSlides() {
-        document.getElementById('chat').style.display = "none";
-        const slideScreen = document.getElementById('slides');
-        slideScreen.style.display = "block";
-        
-        const imgs = ["photos/1.jpg", "photos/2.jpg", "photos/3.jpg"];
-        let x = 0;
-        
-        const interval = setInterval(() => {
-            document.getElementById('slideImg').src = imgs[x];
-            x++;
-            if(x >= imgs.length) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    slideScreen.style.display = "none";
-                    document.getElementById('secret').style.display = "flex";
-                }, 4000);
-            }
-        }, 4000);
-        document.getElementById('slideImg').src = imgs[0]; // Start first
-    }
-
-    function checkName() {
-        const val = document.getElementById('nameInput').value.toLowerCase();
-        if(val === "princess") {
-            document.getElementById('voice').play();
-            document.getElementById('secretText').innerText = "You found the last part… take care, Princess ❤️";
-        }
-    }
+document.body.addEventListener("click", fadeInMusic, { once: true });
 </script>
 </body>
 </html>
