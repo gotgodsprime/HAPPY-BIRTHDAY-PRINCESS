@@ -7,70 +7,39 @@
 <style>
   :root { --glass: rgba(255, 255, 255, 0.1); --border: rgba(255, 255, 255, 0.2); }
   body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #000; color: white; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 100vh; }
-  
-  .intro { position: fixed; inset: 0; background: black; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; letter-spacing: 5px; z-index: 9999; animation: fadeOut 2s forwards 1.5s; }
-  @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-
-  .bg { position: fixed; inset: -10%; background: url('princess.jpg') center/cover no-repeat; filter: blur(15px) brightness(0.3); z-index: -1; animation: drift 30s infinite alternate; }
-  @keyframes drift { from { transform: scale(1); } to { transform: scale(1.1) rotate(1deg); } }
-
-  .container { width: 90%; max-width: 400px; text-align: center; backdrop-filter: blur(10px); padding: 40px 20px; border-radius: 30px; border: 1px solid var(--border); background: var(--glass); opacity: 0; animation: fadeIn 2s forwards 2.5s; }
+  .bg { position: fixed; inset: -10%; background: url('princess.jpg') center/cover no-repeat; filter: blur(30px) brightness(0.2); z-index: -1; }
+  .container { width: 85%; max-width: 350px; text-align: center; backdrop-filter: blur(15px); padding: 40px 20px; border-radius: 30px; border: 1px solid var(--border); background: var(--glass); opacity: 0; animation: fadeIn 2s forwards 1s; }
   @keyframes fadeIn { to { opacity: 1; } }
-
-  h1 { font-weight: 300; margin-bottom: 10px; background: linear-gradient(to bottom, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  #typing { font-size: 1rem; color: rgba(255,255,255,0.7); min-height: 3em; line-height: 1.6; }
-
-  input { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px 20px; border-radius: 25px; color: white; text-align: center; margin-top: 20px; outline: none; width: 80%; transition: 0.3s; }
-  input:focus { background: rgba(255,255,255,0.1); border-color: #fff; }
-  
-  button { margin-top: 15px; padding: 12px 30px; border-radius: 25px; border: none; background: #fff; color: #000; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-  button:hover { transform: scale(1.05); opacity: 0.9; }
+  h1 { font-weight: 300; letter-spacing: 1px; }
+  input { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px; border-radius: 25px; color: white; text-align: center; margin-top: 20px; width: 80%; outline: none; }
+  button { margin-top: 20px; padding: 12px 30px; border-radius: 25px; border: none; background: #fff; color: #000; font-weight: bold; cursor: pointer; transition: 0.3s; }
+  button:hover { transform: scale(1.05); }
 </style>
 </head>
 <body>
-
-<div class="intro">FOR PRINCESS</div>
 <div class="bg"></div>
-
 <audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
 <div class="container">
-  <h1>Happy Birthday</h1>
-  <p id="typing"></p>
-  <input type="text" id="nameInput" placeholder="Who is this for?">
+  <h1>For You.</h1>
+  <p id="typing">A small space for a special day...</p>
+  <input type="text" id="nameInput" placeholder="Unlock with your name...">
   <br>
   <button onclick="unlock()">Unlock</button>
-  <p id="error" style="color:rgba(255,0,0,0.5); font-size: 0.8rem; margin-top:10px;"></p>
 </div>
 
 <script>
-  const msg = "No pressure. No expectations. Just something small for you today.";
-  let i = 0;
-  function type() { if(i < msg.length) { document.getElementById("typing").innerHTML += msg[i]; i++; setTimeout(type, 50); } }
-  setTimeout(type, 3000);
-
-  const audio = document.getElementById("music");
-  // Sync music from storage
-  window.addEventListener('load', () => {
-    const savedTime = localStorage.getItem('musicTime');
-    if(savedTime) audio.currentTime = savedTime;
-  });
-
   function unlock() {
     const val = document.getElementById("nameInput").value.toLowerCase().trim();
+    const audio = document.getElementById("music");
     if(val === "princess") {
-      audio.play();
-      // Save current time before leaving
-      setInterval(() => { localStorage.setItem('musicTime', audio.currentTime); }, 100);
-      document.body.style.transition = "opacity 1s";
+      audio.play(); 
+      localStorage.setItem('musicTime', audio.currentTime);
+      document.body.style.transition = "opacity 1.5s";
       document.body.style.opacity = "0";
-      setTimeout(() => { window.location.href = "memory.html"; }, 1000);
-    } else {
-      document.getElementById("error").innerText = "That's not the name I use...";
+      setTimeout(() => { window.location.href = "memory.html"; }, 1500);
     }
   }
-  // Start music on first click if browser blocked it
-  document.addEventListener('click', () => { audio.play(); }, {once: true});
 </script>
 </body>
 </html>
