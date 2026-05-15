@@ -178,43 +178,67 @@
     const val = document.getElementById("nameInput").value.toLowerCase().trim();
     const audio = document.getElementById("music");
     
-    // The Password is: princess
     if(val === "princess") {
-      audio.play(); 
-      
-      // Save current music state to localStorage for page transitions
-      localStorage.setItem('musicTime', audio.currentTime);
-      
-      // Start Haptic Feedback (if mobile supports it)
-      if (window.navigator.vibrate) {
-          window.navigator.vibrate([50, 100, 50]);
-      }
+      // 1. Force the audio to play immediately upon click
+      // This "unlocks" the audio context in the browser's eyes
+      audio.play().then(() => {
+        console.log("Playback started successfully");
+        
+        // 2. Save the state
+        localStorage.setItem('musicTime', audio.currentTime);
+        
+        // 3. Haptic feedback
+        if (window.navigator.vibrate) {
+            window.navigator.vibrate([50, 100, 50]);
+        }
 
-      // Smooth Page Fade Out
-      document.body.style.transition = "opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1)";
-      document.body.style.opacity = "0";
-      
-      // Constant update of music time so the next page knows where to start
-      setInterval(() => {
-          localStorage.setItem('musicTime', audio.currentTime);
-      }, 100);
+        // 4. Smooth Page Fade Out
+        document.body.style.transition = "opacity 1.2s ease";
+        document.body.style.opacity = "0";
+        
+        // 5. Keep the time synced until the very last millisecond
+        const syncInterval = setInterval(() => {
+            localStorage.setItem('musicTime', audio.currentTime);
+        }, 50);
 
-      setTimeout(() => { 
-        window.location.href = "memory.html"; 
-      }, 1500);
+        // 6. Navigate
+        setTimeout(() => { 
+          clearInterval(syncInterval);
+          window.location.href = "memory.html"; 
+        }, 1200);
+
+      }).catch(error => {
+        // If the browser blocks it, we try one more time
+        console.error("Audio block:", error);
+        audio.muted = true; // Temporary mute to force bypass
+        audio.play();
+        audio.muted = false;
+      });
       
     } else {
       const err = document.getElementById("error");
       err.innerText = "That name doesn't belong here.";
-      
-      // Simple shake effect on error
       const container = document.querySelector('.container');
-      container.style.transform = "translateX(5px)";
-      setTimeout(() => container.style.transform = "translateX(-5px)", 100);
-      setTimeout(() => container.style.transform = "translateX(0)", 200);
+      container.style.animation = "shake 0.3s";
+      setTimeout(() => container.style.animation = "", 300);
     }
   }
 
+  // CSS for the shake effect
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(5px); }
+      50% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+      100% { transform: translateX(0); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  
+  
   // Handle music resuming on browser back-button/refresh
   window.addEventListener('load', () => {
     localStorage.removeItem('musicTime'); // Reset on a fresh start
