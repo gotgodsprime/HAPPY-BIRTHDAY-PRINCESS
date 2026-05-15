@@ -2,19 +2,55 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; background: #000; color: white; height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Segoe UI', sans-serif; overflow: hidden; cursor: pointer; }
-  #text { font-size: 1.1rem; text-align: center; width: 80%; line-height: 1.8; font-weight: 300; transition: opacity 0.8s; }
-  .hint { position: fixed; bottom: 40px; opacity: 0.3; font-size: 0.7rem; letter-spacing: 2px; }
+  body { 
+    margin: 0; background: #000; color: white; height: 100vh; 
+    display: flex; justify-content: center; align-items: center; 
+    font-family: 'Montserrat', sans-serif; overflow: hidden; 
+  }
+
+  /* The "Distant Memory" Background */
+  .bg-memory {
+    position: fixed; inset: -10%;
+    background: url('princess.jpg') center/cover no-repeat;
+    filter: blur(40px) brightness(0.15); /* Very blurry and dark */
+    z-index: -1;
+    animation: slowPan 20s infinite alternate;
+  }
+
+  @keyframes slowPan {
+    from { transform: scale(1); } to { transform: scale(1.1); }
+  }
+
+  #text { 
+    font-size: 1.15rem; text-align: center; width: 80%; 
+    line-height: 2; font-weight: 200; letter-spacing: 1px;
+    transition: opacity 0.8s ease; 
+  }
+
+  .hint { position: fixed; bottom: 40px; opacity: 0.3; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; }
 </style>
 </head>
 <body onclick="nextStep()">
+
+<div class="bg-memory"></div>
 <audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
 <p id="text"></p>
-<div class="hint">TAP TO CONTINUE</div>
+<div class="hint">Tap to follow the story</div>
 
 <script>
-  const lines = ["It wasn’t supposed to be serious...", "But you became familiar.", "Important.", "And even if things changed...", "The memory remains.", "I just didn't want today to pass...", "...without acknowledging you."];
+  const lines = [
+    "It wasn’t supposed to be serious...",
+    "But you became familiar.",
+    "Important.",
+    "And even if things changed...",
+    "The memory remains.",
+    "I just didn't want today to pass...",
+    "...without acknowledging you."
+  ];
+
   let step = 0;
   const audio = document.getElementById("music");
 
@@ -28,11 +64,16 @@
     const el = document.getElementById("text");
     if(step < lines.length) {
       el.style.opacity = 0;
-      setTimeout(() => { el.innerText = lines[step]; el.style.opacity = 1; step++; }, 500);
+      setTimeout(() => { 
+        el.innerText = lines[step]; 
+        el.style.opacity = 1; 
+        step++; 
+      }, 500);
     } else {
       localStorage.setItem('musicTime', audio.currentTime);
+      document.body.style.transition = "opacity 1.5s ease";
       document.body.style.opacity = "0";
-      setTimeout(() => { window.location.href = "secret.html"; }, 1000);
+      setTimeout(() => { window.location.href = "secret.html"; }, 1500);
     }
   }
 </script>
