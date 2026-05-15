@@ -2,58 +2,36 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Memories</title>
 <style>
-  body { margin: 0; background: #000; color: white; height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
-  #text-container { width: 80%; max-width: 500px; text-align: center; }
-  #text { font-size: 1.2rem; line-height: 1.8; font-weight: 300; transition: opacity 0.5s; }
-  .hint { position: fixed; bottom: 30px; opacity: 0.3; font-size: 0.8rem; letter-spacing: 2px; }
+  body { margin: 0; background: #000; color: white; height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Segoe UI', sans-serif; overflow: hidden; cursor: pointer; }
+  #text { font-size: 1.1rem; text-align: center; width: 80%; line-height: 1.8; font-weight: 300; transition: opacity 0.8s; }
+  .hint { position: fixed; bottom: 40px; opacity: 0.3; font-size: 0.7rem; letter-spacing: 2px; }
 </style>
 </head>
 <body onclick="nextStep()">
-
 <audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
-
-<div id="text-container">
-  <p id="text"></p>
-</div>
-
+<p id="text"></p>
 <div class="hint">TAP TO CONTINUE</div>
 
 <script>
-  const lines = [
-    "It wasn’t supposed to be anything serious…",
-    "Just two people… existing in the same space.",
-    "But somehow… it became something more.",
-    "You became familiar. Comforting. Important.",
-    "And even when things changed…",
-    "That doesn’t erase what it was.",
-    "Some connections don’t need noise…",
-    "They just exist."
-  ];
-
+  const lines = ["It wasn’t supposed to be serious...", "But you became familiar.", "Important.", "And even if things changed...", "The memory remains.", "I just didn't want today to pass...", "...without acknowledging you."];
   let step = 0;
   const audio = document.getElementById("music");
 
-  window.addEventListener('load', () => {
-    const savedTime = localStorage.getItem('musicTime');
-    if(savedTime) audio.currentTime = savedTime;
+  window.onload = () => {
+    audio.currentTime = localStorage.getItem('musicTime') || 0;
     audio.play();
-    nextStep(); 
-  });
+    nextStep();
+  };
 
   function nextStep() {
+    const el = document.getElementById("text");
     if(step < lines.length) {
-      const el = document.getElementById("text");
       el.style.opacity = 0;
-      setTimeout(() => {
-        el.innerText = lines[step];
-        el.style.opacity = 1;
-        step++;
-      }, 500);
+      setTimeout(() => { el.innerText = lines[step]; el.style.opacity = 1; step++; }, 500);
     } else {
       localStorage.setItem('musicTime', audio.currentTime);
-      document.body.style.opacity = 0;
+      document.body.style.opacity = "0";
       setTimeout(() => { window.location.href = "secret.html"; }, 1000);
     }
   }
