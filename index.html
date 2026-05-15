@@ -4,226 +4,73 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Princess ❤️</title>
-
 <style>
-  :root {
-    --glass: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --text-glow: rgba(255, 255, 255, 0.4);
-  }
+  :root { --glass: rgba(255, 255, 255, 0.1); --border: rgba(255, 255, 255, 0.2); }
+  body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #000; color: white; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 100vh; }
+  
+  .intro { position: fixed; inset: 0; background: black; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; letter-spacing: 5px; z-index: 9999; animation: fadeOut 2s forwards 1.5s; }
+  @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: #000;
-    color: white;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
+  .bg { position: fixed; inset: -10%; background: url('princess.jpg') center/cover no-repeat; filter: blur(15px) brightness(0.3); z-index: -1; animation: drift 30s infinite alternate; }
+  @keyframes drift { from { transform: scale(1); } to { transform: scale(1.1) rotate(1deg); } }
 
-  /* CINEMATIC INTRO */
-  .intro-screen {
-    position: fixed;
-    inset: 0;
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-weight: 200;
-    z-index: 9999;
-    animation: introOut 3s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-    animation-delay: 1s;
-  }
+  .container { width: 90%; max-width: 400px; text-align: center; backdrop-filter: blur(10px); padding: 40px 20px; border-radius: 30px; border: 1px solid var(--border); background: var(--glass); opacity: 0; animation: fadeIn 2s forwards 2.5s; }
+  @keyframes fadeIn { to { opacity: 1; } }
 
-  @keyframes introOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
-  }
+  h1 { font-weight: 300; margin-bottom: 10px; background: linear-gradient(to bottom, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  #typing { font-size: 1rem; color: rgba(255,255,255,0.7); min-height: 3em; line-height: 1.6; }
 
-  /* BACKGROUND DEPTH */
-  .bg-image {
-    position: fixed;
-    inset: -10%;
-    background: url('princess.jpg') center/cover no-repeat;
-    filter: blur(20px) brightness(0.3) saturate(1.2);
-    z-index: -2;
-    animation: slowPan 30s ease-in-out infinite alternate;
-  }
-
-  @keyframes slowPan {
-    from { transform: scale(1) translateX(-2%); }
-    to { transform: scale(1.1) translateX(2%); }
-  }
-
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85) 100%);
-    z-index: -1;
-  }
-
-  /* CONTENT BOX */
-  .container {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    text-align: center;
-    opacity: 0;
-    animation: mainFadeIn 2.5s ease-out 2s forwards;
-  }
-
-  @keyframes mainFadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  h1 {
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-    font-weight: 300;
-    background: linear-gradient(to bottom, #fff, #b3b3b3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
-    letter-spacing: -0.5px;
-  }
-
-  #typing {
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.7);
-    min-height: 1.5em;
-  }
-
-  /* PREMIUM BUTTONS */
-  button {
-    margin-top: 30px;
-    padding: 14px 35px;
-    border-radius: 50px;
-    border: 1px solid var(--glass-border);
-    background: var(--glass);
-    color: white;
-    font-weight: 300;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    cursor: pointer;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  button:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-  }
-
-  /* HIDDEN REVEAL */
-  .hidden {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transform: translateY(30px);
-    transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .show {
-    opacity: 1;
-    max-height: 1000px;
-    margin-top: 40px;
-    transform: translateY(0);
-  }
-
-  .message-body {
-    font-size: 1.1rem;
-    line-height: 2;
-    color: rgba(255,255,255,0.85);
-    white-space: pre-line;
-    max-width: 500px;
-  }
+  input { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px 20px; border-radius: 25px; color: white; text-align: center; margin-top: 20px; outline: none; width: 80%; transition: 0.3s; }
+  input:focus { background: rgba(255,255,255,0.1); border-color: #fff; }
+  
+  button { margin-top: 15px; padding: 12px 30px; border-radius: 25px; border: none; background: #fff; color: #000; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+  button:hover { transform: scale(1.05); opacity: 0.9; }
 </style>
 </head>
 <body>
 
-<div class="intro-screen">For Princess</div>
+<div class="intro">FOR PRINCESS</div>
+<div class="bg"></div>
 
-<div class="bg-image"></div>
-<div class="overlay"></div>
-
-<audio id="bgMusic" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
+<audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
 <div class="container">
-  <h1>Happy Birthday, Princess</h1>
+  <h1>Happy Birthday</h1>
   <p id="typing"></p>
-
-  <button id="mainBtn" onclick="showMessage()">Tap to continue</button>
-
-  <div class="hidden" id="secret">
-    <div class="message-body">
-      I didn’t want today to pass without saying something…  
-
-      Not to reopen anything, not to complicate things,  
-      just to be honest for a moment.  
-
-      You were an important part of my life,  
-      and I will always respect that.  
-
-      I hope life is treating you kindly,  
-      and that you find happiness in ways that stay.  
-
-      Happy Birthday, Princess ❤️  
-    </div>
-    <button onclick="goSecret()">There’s something else…</button>
-  </div>
+  <input type="text" id="nameInput" placeholder="Who is this for?">
+  <br>
+  <button onclick="unlock()">Unlock</button>
+  <p id="error" style="color:rgba(255,0,0,0.5); font-size: 0.8rem; margin-top:10px;"></p>
 </div>
 
 <script>
-const text = "No pressure. No expectations. Just something small for you today.";
-let i = 0;
+  const msg = "No pressure. No expectations. Just something small for you today.";
+  let i = 0;
+  function type() { if(i < msg.length) { document.getElementById("typing").innerHTML += msg[i]; i++; setTimeout(type, 50); } }
+  setTimeout(type, 3000);
 
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 50);
+  const audio = document.getElementById("music");
+  // Sync music from storage
+  window.addEventListener('load', () => {
+    const savedTime = localStorage.getItem('musicTime');
+    if(savedTime) audio.currentTime = savedTime;
+  });
+
+  function unlock() {
+    const val = document.getElementById("nameInput").value.toLowerCase().trim();
+    if(val === "princess") {
+      audio.play();
+      // Save current time before leaving
+      setInterval(() => { localStorage.setItem('musicTime', audio.currentTime); }, 100);
+      document.body.style.transition = "opacity 1s";
+      document.body.style.opacity = "0";
+      setTimeout(() => { window.location.href = "memory.html"; }, 1000);
+    } else {
+      document.getElementById("error").innerText = "That's not the name I use...";
+    }
   }
-}
-setTimeout(typeWriter, 4000); // Wait for intro
-
-function showMessage() {
-  document.getElementById("secret").classList.add("show");
-  document.getElementById("mainBtn").style.display = "none";
-}
-
-function goSecret() {
-  document.body.style.transition = "opacity 1.5s ease";
-  document.body.style.opacity = "0";
-  setTimeout(() => { window.location.href = "secret.html"; }, 1500);
-}
-
-const music = document.getElementById("bgMusic");
-function fadeInMusic() {
-  music.play();
-  music.volume = 0;
-  let v = 0;
-  const t = setInterval(() => {
-    if (v < 0.6) { v += 0.02; music.volume = v; } 
-    else { clearInterval(t); }
-  }, 200);
-}
-
-document.body.addEventListener("click", fadeInMusic, { once: true });
+  // Start music on first click if browser blocked it
+  document.addEventListener('click', () => { audio.play(); }, {once: true});
 </script>
 </body>
 </html>
