@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+<style>
+  body { margin: 0; background: #050505; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+  h1 { font-size: 3rem; text-align: center; z-index: 10; text-shadow: 0 0 20px rgba(255,255,255,0.5); animation: pop 1s cubic-bezier(0.17, 0.89, 0.32, 1.49); }
+  @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+  .heart { position: absolute; color: #ff2d55; animation: floatUp 4s linear forwards; z-index: 5; }
+  @keyframes floatUp { from { transform: translateY(110vh) scale(1); opacity: 1; } to { transform: translateY(-10vh) scale(1.5); opacity: 0; } }
+  .firework { position: absolute; width: 5px; height: 5px; background: white; border-radius: 50%; animation: explode 1s ease-out forwards; }
+  @keyframes explode { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(30); opacity: 0; } }
+</style>
+</head>
+<body>
+
+<audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
+<h1>Happy Birthday, Princess! 🎉🎂❤️</h1>
+<p style="z-index: 10; opacity: 0.7;">Enjoy your special day.</p>
+
+<script>
+  const audio = document.getElementById("music");
+  window.onload = () => {
+    audio.currentTime = localStorage.getItem('musicTime') || 0;
+    audio.play();
+    setInterval(createHeart, 300);
+    setInterval(createFirework, 800);
+  };
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }
+
+  function createFirework() {
+    const f = document.createElement('div');
+    f.className = 'firework';
+    f.style.left = Math.random() * 100 + 'vw';
+    f.style.top = Math.random() * 100 + 'vh';
+    f.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 1000);
+  }
+</script>
+</body>
+</html>
