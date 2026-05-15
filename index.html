@@ -4,42 +4,222 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Princess ❤️</title>
+
+<!-- Premium Typography -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+
 <style>
-  :root { --glass: rgba(255, 255, 255, 0.1); --border: rgba(255, 255, 255, 0.2); }
-  body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #000; color: white; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 100vh; }
-  .bg { position: fixed; inset: -10%; background: url('princess.jpg') center/cover no-repeat; filter: blur(30px) brightness(0.2); z-index: -1; }
-  .container { width: 85%; max-width: 350px; text-align: center; backdrop-filter: blur(15px); padding: 40px 20px; border-radius: 30px; border: 1px solid var(--border); background: var(--glass); opacity: 0; animation: fadeIn 2s forwards 1s; }
+  :root { 
+    --glass: rgba(255, 255, 255, 0.07); 
+    --glass-border: rgba(255, 255, 255, 0.15); 
+  }
+
+  body { 
+    margin: 0; 
+    background: #000; 
+    color: white; 
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Cinematic Film Grain Overlay */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png');
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* Blurry Memory Background */
+  .bg { 
+    position: fixed; 
+    inset: -10%; 
+    background: url('princess.jpg') center/cover no-repeat; 
+    filter: blur(35px) brightness(0.2); 
+    z-index: -1; 
+    transition: filter 3s ease;
+  }
+
+  /* The Intro Splash */
+  .intro { 
+    position: fixed; 
+    inset: 0; 
+    background: black; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem; 
+    letter-spacing: 8px; 
+    z-index: 9999; 
+    animation: fadeOut 2.5s forwards 1.5s; 
+  }
+
+  @keyframes fadeOut { 
+    to { opacity: 0; visibility: hidden; } 
+  }
+
+  /* Main UI Card */
+  .container { 
+    width: 85%; 
+    max-width: 380px; 
+    text-align: center; 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    padding: 50px 30px; 
+    border-radius: 40px; 
+    border: 1px solid var(--glass-border); 
+    background: var(--glass); 
+    opacity: 0; 
+    animation: fadeIn 3s forwards 3s; 
+  }
+
   @keyframes fadeIn { to { opacity: 1; } }
-  h1 { font-weight: 300; letter-spacing: 1px; }
-  input { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 12px; border-radius: 25px; color: white; text-align: center; margin-top: 20px; width: 80%; outline: none; }
-  button { margin-top: 20px; padding: 12px 30px; border-radius: 25px; border: none; background: #fff; color: #000; font-weight: bold; cursor: pointer; transition: 0.3s; }
-  button:hover { transform: scale(1.05); }
+
+  h1 { 
+    font-family: 'Cinzel', serif;
+    font-weight: 400; 
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    background: linear-gradient(to bottom, #fff, #999); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+  }
+
+  p { 
+    font-weight: 200; 
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  /* Premium Input & Button */
+  input { 
+    background: rgba(255,255,255,0.03); 
+    border: 1px solid var(--glass-border); 
+    padding: 14px; 
+    border-radius: 15px; 
+    color: white; 
+    text-align: center; 
+    width: 100%; 
+    outline: none; 
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    transition: 0.4s;
+    box-sizing: border-box;
+  }
+
+  input:focus {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  button { 
+    margin-top: 25px; 
+    width: 100%;
+    padding: 16px; 
+    border-radius: 15px; 
+    border: none; 
+    background: #fff; 
+    color: #000; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer; 
+    transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); 
+  }
+
+  button:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  }
+
+  #error {
+    margin-top: 15px;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    min-height: 1em;
+  }
 </style>
 </head>
 <body>
+
+<div class="intro">FOR PRINCESS</div>
 <div class="bg"></div>
-<audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
+<!-- Audio hidden until unlocked -->
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <div class="container">
-  <h1>For You.</h1>
-  <p id="typing">A small space for a special day...</p>
-  <input type="text" id="nameInput" placeholder="Unlock with your name...">
-  <br>
-  <button onclick="unlock()">Unlock</button>
+  <h1>WELCOME</h1>
+  <p>To access this space, please identify yourself.</p>
+  
+  <input type="text" id="nameInput" placeholder="Enter your name" autocomplete="off">
+  <button onclick="unlock()">Unlock Memory</button>
+  <p id="error"></p>
 </div>
 
 <script>
   function unlock() {
     const val = document.getElementById("nameInput").value.toLowerCase().trim();
     const audio = document.getElementById("music");
+    
+    // The Password is: princess
     if(val === "princess") {
       audio.play(); 
+      
+      // Save current music state to localStorage for page transitions
       localStorage.setItem('musicTime', audio.currentTime);
-      document.body.style.transition = "opacity 1.5s";
+      
+      // Start Haptic Feedback (if mobile supports it)
+      if (window.navigator.vibrate) {
+          window.navigator.vibrate([50, 100, 50]);
+      }
+
+      // Smooth Page Fade Out
+      document.body.style.transition = "opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1)";
       document.body.style.opacity = "0";
-      setTimeout(() => { window.location.href = "memory.html"; }, 1500);
+      
+      // Constant update of music time so the next page knows where to start
+      setInterval(() => {
+          localStorage.setItem('musicTime', audio.currentTime);
+      }, 100);
+
+      setTimeout(() => { 
+        window.location.href = "memory.html"; 
+      }, 1500);
+      
+    } else {
+      const err = document.getElementById("error");
+      err.innerText = "That name doesn't belong here.";
+      
+      // Simple shake effect on error
+      const container = document.querySelector('.container');
+      container.style.transform = "translateX(5px)";
+      setTimeout(() => container.style.transform = "translateX(-5px)", 100);
+      setTimeout(() => container.style.transform = "translateX(0)", 200);
     }
   }
+
+  // Handle music resuming on browser back-button/refresh
+  window.addEventListener('load', () => {
+    localStorage.removeItem('musicTime'); // Reset on a fresh start
+  });
 </script>
+
 </body>
 </html>
