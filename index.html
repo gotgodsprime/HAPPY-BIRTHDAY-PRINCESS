@@ -1,249 +1,662 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Princess ❤️</title>
-
-<!-- Premium Typography -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
-
-<style>
-  :root { 
-    --glass: rgba(255, 255, 255, 0.07); 
-    --glass-border: rgba(255, 255, 255, 0.15); 
-  }
-
-  body { 
-    margin: 0; 
-    background: #000; 
-    color: white; 
-    overflow: hidden; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    height: 100vh;
-    font-family: 'Montserrat', sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* Cinematic Film Grain Overlay */
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png');
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 1000;
-  }
-
-  /* Blurry Memory Background */
-  .bg { 
-    position: fixed; 
-    inset: -10%; 
-    background: url('princess.jpg') center/cover no-repeat; 
-    filter: blur(35px) brightness(0.2); 
-    z-index: -1; 
-    transition: filter 3s ease;
-  }
-
-  /* The Intro Splash */
-  .intro { 
-    position: fixed; 
-    inset: 0; 
-    background: black; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem; 
-    letter-spacing: 8px; 
-    z-index: 9999; 
-    animation: fadeOut 2.5s forwards 1.5s; 
-  }
-
-  @keyframes fadeOut { 
-    to { opacity: 0; visibility: hidden; } 
-  }
-
-  /* Main UI Card */
-  .container { 
-    width: 85%; 
-    max-width: 380px; 
-    text-align: center; 
-    backdrop-filter: blur(20px); 
-    -webkit-backdrop-filter: blur(20px);
-    padding: 50px 30px; 
-    border-radius: 40px; 
-    border: 1px solid var(--glass-border); 
-    background: var(--glass); 
-    opacity: 0; 
-    animation: fadeIn 3s forwards 3s; 
-  }
-
-  @keyframes fadeIn { to { opacity: 1; } }
-
-  h1 { 
-    font-family: 'Cinzel', serif;
-    font-weight: 400; 
-    margin-bottom: 20px;
-    letter-spacing: 3px;
-    background: linear-gradient(to bottom, #fff, #999); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-  }
-
-  p { 
-    font-weight: 200; 
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 30px;
-    line-height: 1.6;
-  }
-
-  /* Premium Input & Button */
-  input { 
-    background: rgba(255,255,255,0.03); 
-    border: 1px solid var(--glass-border); 
-    padding: 14px; 
-    border-radius: 15px; 
-    color: white; 
-    text-align: center; 
-    width: 100%; 
-    outline: none; 
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: 1px;
-    transition: 0.4s;
-    box-sizing: border-box;
-  }
-
-  input:focus {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.4);
-  }
-
-  button { 
-    margin-top: 25px; 
-    width: 100%;
-    padding: 16px; 
-    border-radius: 15px; 
-    border: none; 
-    background: #fff; 
-    color: #000; 
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer; 
-    transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); 
-  }
-
-  button:hover { 
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-  }
-
-  #error {
-    margin-top: 15px;
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.4);
-    min-height: 1em;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes of Midnight - Happy Birthday Princess</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Cinematic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght=200;300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #030008;
+            /* FIXED: Allowed scrolling so the user can scroll up and down freely */
+            overflow-y: auto;
+        }
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        .font-script {
+            font-family: 'Pinyon Script', cursive;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030008;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e0854;
+            border-radius: 10px;
+        }
+        /* Soft pulsing neon glows */
+        .glow-gold {
+            text-shadow: 0 0 12px rgba(254, 240, 138, 0.3), 0 0 24px rgba(254, 240, 138, 0.15);
+        }
+        .glow-purple {
+            box-shadow: 0 0 40px rgba(147, 51, 234, 0.08);
+        }
+        .glow-rose-gold {
+            box-shadow: 0 0 40px rgba(244, 180, 180, 0.15);
+            border-color: rgba(244, 180, 180, 0.2);
+        }
+        /* Animations */
+        @keyframes slow-pan {
+            0% { transform: scale(1) translate(0px, 0px); }
+            50% { transform: scale(1.03) translate(5px, -10px); }
+            100% { transform: scale(1) translate(0px, 0px); }
+        }
+        .bg-pan {
+            animation: slow-pan 25s infinite ease-in-out;
+        }
+        /* Cinematic fading transitions */
+        .fade-in-out {
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        .hidden-cinematic {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        
+        /* Shimmer effect for portrait reveal */
+        .shimmer-bg {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 4s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
 </head>
-<body>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between relative select-none">
 
-<div class="intro">FOR PRINCESS</div>
-<div class="bg"></div>
+    <!-- Ambient Sky Background Canvas -->
+    <canvas id="ambientCanvas" class="absolute inset-0 w-full h-full z-0 block"></canvas>
 
-<!-- Audio hidden until unlocked -->
-<audio id="music" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
+    <!-- Subtle Color Gradients Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-purple-950/10 via-transparent to-black/90 z-1 pointer-events-none"></div>
 
-<div class="container">
-  <h1>WELCOME</h1>
-  <p>To access this space, please identify yourself.</p>
-  
-  <input type="text" id="nameInput" placeholder="Enter your name" autocomplete="off">
-  <button onclick="unlock()">Unlock Memory</button>
-  <p id="error"></p>
-</div>
+    <!-- MAIN INTERACTIVE APP CONTAINER -->
+    <main class="relative z-10 flex-grow flex flex-col justify-center items-center px-4 md:px-8 py-8">
 
-<script>
-  function unlock() {
-    const val = document.getElementById("nameInput").value.toLowerCase().trim();
-    const audio = document.getElementById("music");
-    
-    if(val === "princess") {
-      // 1. Force the audio to play immediately upon click
-      // This "unlocks" the audio context in the browser's eyes
-      audio.play().then(() => {
-        console.log("Playback started successfully");
-        
-        // 2. Save the state
-        localStorage.setItem('musicTime', audio.currentTime);
-        
-        // 3. Haptic feedback
-        if (window.navigator.vibrate) {
-            window.navigator.vibrate([50, 100, 50]);
+        <!-- ACT I: THE IMMERSIVE LANDING SCREEN -->
+        <section id="act-landing" class="max-w-xl text-center flex flex-col items-center justify-center space-y-8 py-12 transition-all duration-1000">
+            <div class="space-y-4">
+                <p class="text-xs tracking-[0.4em] uppercase text-purple-400 font-semibold opacity-90">An Interactive Cinematic Experience</p>
+                <h1 class="text-4xl md:text-6xl font-cinzel font-bold text-yellow-100/90 tracking-wider glow-gold">Echoes of Midnight</h1>
+                <p class="text-sm md:text-base text-slate-400 font-light max-w-md mx-auto leading-relaxed px-4">
+                    A celestial journey crafted in honor of <span class="text-yellow-200/90 font-medium">Amakyewaa</span> on her special day. Please turn up your audio and find a quiet space.
+                </p>
+            </div>
+
+            <!-- Cinematic Audio Play Button -->
+            <button onclick="beginJourney()" class="group relative px-8 py-4 bg-purple-950/20 border border-yellow-500/20 rounded-full overflow-hidden transition-all duration-500 hover:border-yellow-400/60 hover:bg-purple-900/30 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] active:scale-98">
+                <span class="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                <span class="relative font-cinzel text-xs md:text-sm text-yellow-100/80 group-hover:text-yellow-100 tracking-[0.25em] flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 animate-pulse fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    BEGIN THE JOURNEY
+                </span>
+            </button>
+        </section>
+
+        <!-- ACT II: THE STORY SEQUENCE -->
+        <section id="act-story" class="hidden opacity-0 transform translate-y-6 max-w-2xl text-center flex flex-col items-center justify-center space-y-6 min-h-[280px] transition-all duration-1000">
+            <!-- Story blocks fade in and out dynamically -->
+            <div id="story-display" class="fade-in-out text-xl md:text-2xl font-cinzel text-yellow-100/90 leading-relaxed font-light px-6"></div>
+            <div id="story-subtitle" class="fade-in-out text-slate-400 italic font-script text-2xl tracking-wide opacity-70 h-8"></div>
+            
+            <!-- Quick progression control -->
+            <button id="story-next-btn" onclick="nextStorySegment()" class="opacity-0 transition-opacity duration-1000 mt-10 group flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-purple-400 hover:text-yellow-300 transition-colors">
+                <span>Continue</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </section>
+
+        <!-- ACT III: THE CELESTIAL DASHBOARD -->
+        <section id="act-interactive" class="hidden opacity-0 transform translate-y-6 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center justify-center transition-all duration-1000 py-4">
+            
+            <!-- LEFT PANEL: Interactive Sky Controls & Wishes -->
+            <div class="lg:col-span-4 flex flex-col space-y-6 self-start">
+                <div class="bg-black/50 border border-purple-950/60 backdrop-blur-md p-6 rounded-2xl glow-purple flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-sm font-cinzel font-semibold text-yellow-100/90 tracking-wider flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-ping"></span>
+                                Release a Wishing Lantern
+                            </h2>
+                            <span class="text-[9px] uppercase text-purple-400 tracking-widest bg-purple-950/40 px-2 py-0.5 rounded border border-purple-900/30">Interactive</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-6 leading-relaxed font-light">
+                            Type a warm blessing, memory, or wish , and watch it rise into the midnight sky ecosystem.
+                        </p>
+                    </div>
+
+                    <!-- Preset micro-wishes -->
+                    <div class="flex flex-wrap gap-1.5 mb-5">
+                        <button onclick="setPresetWish('May your year be filled with beautiful moments, Princess! ✨')" class="text-[10px] bg-purple-950/20 hover:bg-purple-900/40 border border-purple-900/40 hover:border-yellow-500/30 text-slate-400 hover:text-yellow-100 px-2.5 py-1 rounded-full transition-all duration-300">✨ Princess's Joy</button>
+                        <button onclick="setPresetWish('Wishing you infinite peace and happiness, Princess. 🌿')" class="text-[10px] bg-purple-950/20 hover:bg-purple-900/40 border border-purple-900/40 hover:border-yellow-500/30 text-slate-400 hover:text-yellow-100 px-2.5 py-1 rounded-full transition-all duration-300">🌿 Pure Peace</button>
+                    </div>
+
+                    <!-- Input form -->
+                    <div class="flex gap-2">
+                        <input type="text" id="wish-input" maxlength="100" placeholder="Type a blessing..." class="flex-grow bg-black/60 border border-purple-950 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-yellow-500/30 transition-all duration-300">
+                        <button onclick="releaseLanternFromInput()" class="bg-yellow-500/5 hover:bg-yellow-500/10 border border-yellow-500/30 hover:border-yellow-400/60 text-yellow-200/80 hover:text-yellow-100 px-4 rounded-xl text-[11px] font-medium tracking-widest uppercase transition-all duration-300">
+                            Send
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Sound Synthesizer Node -->
+                <div class="bg-black/40 border border-purple-950/50 backdrop-blur-md p-4 rounded-xl flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleAudio()" class="w-9 h-9 rounded-lg bg-purple-950/30 flex items-center justify-center border border-purple-900/30 text-yellow-500/80 hover:text-yellow-400 transition-colors">
+                            <svg id="mute-icon-on" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75V5.25L7.75 9H4.5v6h3.25L12 18.75z" /></svg>
+                            <svg id="mute-icon-off" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                        </button>
+                        <div>
+                            <p class="text-xs font-medium text-slate-300">Ambient Music Engine</p>
+                            <p class="text-[10px] text-slate-500 font-light">Live-synthesizing celestial chimes</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <button onclick="playChime(329.63)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">E</button>
+                        <button onclick="playChime(392.00)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">G</button>
+                        <button onclick="playChime(440.00)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">A</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIDDLE PANEL: The Portrait of Princess -->
+            <div class="lg:col-span-4 flex flex-col items-center justify-center relative">
+                <div id="portrait-card" class="opacity-0 translate-y-4 duration-1000 ease-out transition-all bg-gradient-to-b from-purple-950/20 to-black/90 border glow-rose-gold p-3 rounded-2xl backdrop-blur-lg w-full max-w-[320px] relative overflow-hidden group">
+                    <div class="absolute inset-0 shimmer-bg opacity-20 pointer-events-none rounded-2xl"></div>
+                    
+                    <!-- Portrait Frame -->
+                    <div class="relative rounded-xl overflow-hidden aspect-[4/5] border border-white/5 shadow-inner bg-purple-950/10">
+                        <!-- UPDATED: Now points permanently to image.jpg -->
+                        <img id="princess-image" src="image.jpg" alt="Princess" class="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-103" onerror="handleImageError()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-center">
+                            <span class="text-[11px] font-cinzel text-yellow-100/80 tracking-[0.25em] uppercase glow-gold">Happy Birthday Princess</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: Elegant Customized Birthday Letter -->
+            <div class="lg:col-span-4 self-start">
+                <div class="bg-black/50 border border-yellow-500/10 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-2xl relative overflow-hidden transition-all hover:border-yellow-500/20">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/5 to-transparent rounded-bl-full pointer-events-none"></div>
+                    
+                    <!-- Recipient Header -->
+                    <div class="border-b border-purple-950 pb-4 mb-6 flex justify-between items-end">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-[0.3em] text-yellow-500/60 font-medium">To Someone Special</span>
+                            <h3 id="letter-to" class="text-2xl font-cinzel text-yellow-100/90 tracking-wider glow-gold font-semibold">Princess</h3>
+                        </div>
+                    </div>
+
+                    <!-- Letter Body Typography -->
+                    <div class="space-y-4 text-xs md:text-sm text-slate-300 leading-relaxed font-light tracking-wide">
+                        <p id="letter-paragraph-1">
+                            Today is a beautiful milestone, celebrating the day you entered the world. While our chapters have shifted and our paths look different now, my genuine admiration for the person you are has never wavered.
+                        </p>
+                        <p id="letter-paragraph-2">
+                            I hope today brings you the kind of joy that stays with you all year. You deserve a day filled with true laughter, a life surrounded by people who elevate your soul, and a deep sense of peace in everything you do.
+                        </p>
+                        <p id="letter-paragraph-3">
+                            Thank you for the beautiful memories and the lessons we shared along the way. May this new year of your life be your most vibrant, successful, and fulfilling chapter yet.
+                        </p>
+                    </div>
+
+                    <!-- Letter Footer -->
+                    <div class="mt-8 pt-4 border-t border-purple-950 flex justify-between items-center">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-widest text-slate-500 block font-medium">Sent with respect</span>
+                            <span id="letter-from" class="font-script text-3xl text-yellow-200/80 tracking-wide">Always</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- UI Notification System -->
+    <div id="notification-banner" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-purple-950/80 border border-purple-800/40 backdrop-blur-md text-yellow-100/90 px-6 py-3 rounded-full text-[11px] font-medium uppercase tracking-widest shadow-2xl opacity-0 scale-95 pointer-events-none transition-all duration-500 z-50 flex items-center gap-2">
+        <span id="notification-text">Wish rising into the digital sky!</span>
+    </div>
+
+    <!-- GLOBAL APPARATUS FOOTER -->
+    <footer class="relative z-10 w-full text-center py-6 border-t border-purple-950/20 backdrop-blur-xs bg-black/10 text-[9px] text-slate-600 tracking-[0.25em] font-light">
+        <p>2026 Echoes of Midnight. Tap empty sky coordinates to spawn cascading shooting stars.</p>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE LOGIC -->
+    <script>
+        // 1. SCENARIO PROFILE CONFIGURATION (UPDATED TO CHOSEN POETIC SCRIPT)
+        const storySegments = [
+            {
+                text: "The universe keeps turning, rewriting the stars and shifting our paths.",
+                subtitle: "Quietly, beautifully..."
+            },
+            {
+                text: "But certain chapters leave a lasting print of gratitude that time doesn't fade.",
+                subtitle: "A quiet constant..."
+            },
+            {
+                text: "Today, the world celebrates the day your bright spirit entered it.",
+                subtitle: "A beautiful reason to smile..."
+            },
+            {
+                text: "May your horizon always be clear, and may this new year bring you infinite happiness.",
+                subtitle: "Always wishing you the best, Princess."
+            }
+        ];
+        let currentStoryIndex = 0;
+
+        // 2. WEB AUDIO CONTEXT CAPABILITY
+        let audioCtx = null;
+        let isAudioMuted = false;
+        let ambientSequenceTimer = null;
+
+        function initAudio() {
+            if (audioCtx) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            startAmbientSequencer();
         }
 
-        // 4. Smooth Page Fade Out
-        document.body.style.transition = "opacity 1.2s ease";
-        document.body.style.opacity = "0";
-        
-        // 5. Keep the time synced until the very last millisecond
-        const syncInterval = setInterval(() => {
-            localStorage.setItem('musicTime', audio.currentTime);
-        }, 50);
+        function playChime(frequency, type = 'sine', duration = 2.5, gainVal = 0.12) {
+            if (!audioCtx || isAudioMuted) return;
+            try {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                const filter = audioCtx.createBiquadFilter();
 
-        // 6. Navigate
-        setTimeout(() => { 
-          clearInterval(syncInterval);
-          window.location.href = "memory.html"; 
-        }, 1200);
+                osc.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
 
-      }).catch(error => {
-        // If the browser blocks it, we try one more time
-        console.error("Audio block:", error);
-        audio.muted = true; // Temporary mute to force bypass
-        audio.play();
-        audio.muted = false;
-      });
-      
-    } else {
-      const err = document.getElementById("error");
-      err.innerText = "That name doesn't belong here.";
-      const container = document.querySelector('.container');
-      container.style.animation = "shake 0.3s";
-      setTimeout(() => container.style.animation = "", 300);
-    }
-  }
+                osc.type = type;
+                osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
 
-  // CSS for the shake effect
-  const style = document.createElement('style');
-  style.innerHTML = `
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(5px); }
-      50% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-      100% { transform: translateX(0); }
-    }
-  `;
-  document.head.appendChild(style);
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(1800, audioCtx.currentTime);
 
-  
-  
-  // Handle music resuming on browser back-button/refresh
-  window.addEventListener('load', () => {
-    localStorage.removeItem('musicTime'); // Reset on a fresh start
-  });
-</script>
+                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(gainVal, audioCtx.currentTime + 0.04);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
 
+                osc.start(audioCtx.currentTime);
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (error) {
+                console.error("Audio Synthesis Interruption: ", error);
+            }
+        }
+
+        function startAmbientSequencer() {
+            const chordNotes = [
+                [130.81, 196.00, 246.94, 329.63], 
+                [146.83, 220.00, 293.66, 349.23], 
+                [110.07, 220.00, 277.18, 440.00], 
+                [130.81, 196.00, 261.63, 392.00]
+            ];
+            let chordIndex = 0;
+
+            function playChordSequence() {
+                if (isAudioMuted || !audioCtx) {
+                    ambientSequenceTimer = setTimeout(playChordSequence, 6000);
+                    return;
+                }
+                const currentChord = chordNotes[chordIndex];
+                currentChord.forEach((freq, index) => {
+                    setTimeout(() => {
+                        playChime(freq, 'triangle', 4, 0.03);
+                        if (Math.random() > 0.6) {
+                            setTimeout(() => {
+                                playChime(freq * 2, 'sine', 3, 0.015);
+                            }, 400);
+                        }
+                    }, index * 350);
+                });
+                chordIndex = (chordIndex + 1) % chordNotes.length;
+                ambientSequenceTimer = setTimeout(playChordSequence, 8000);
+            }
+            playChordSequence();
+        }
+
+        function toggleAudio() {
+            isAudioMuted = !isAudioMuted;
+            document.getElementById('mute-icon-on').classList.toggle('hidden', isAudioMuted);
+            document.getElementById('mute-icon-off').classList.toggle('hidden', !isAudioMuted);
+            if (!isAudioMuted && audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            showNotification(isAudioMuted ? "Acoustic streams muted" : "Atmospheric space sounds online");
+        }
+
+        // 3. CANVAS GRAPHICS MATHEMATICS (Dynamic Render Environment)
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [], lanterns = [], shootingStars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.2;
+                this.alpha = Math.random();
+                this.speed = 0.008 + Math.random() * 0.015;
+            }
+            update() {
+                this.alpha += this.speed;
+                if (this.alpha > 1 || this.alpha < 0) this.speed = -this.speed;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        class Lantern {
+            constructor(text = "") {
+                this.text = text;
+                this.x = Math.random() * (canvas.width - 120) + 60;
+                this.y = canvas.height + 60;
+                this.size = Math.random() * 5 + 8;
+                this.speed = 0.35 + Math.random() * 0.45;
+                this.alpha = 1;
+                this.angle = Math.random() * Math.PI * 2;
+                this.swaySpeed = 0.008 + Math.random() * 0.012;
+                this.pulse = 0;
+            }
+            update() {
+                this.y -= this.speed;
+                this.angle += this.swaySpeed;
+                this.x += Math.sin(this.angle) * 0.2;
+                this.pulse += 0.025;
+                if (this.y < canvas.height * 0.35) {
+                    this.alpha -= 0.002;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2.2);
+                const pulseIntensity = 0.12 * Math.sin(this.pulse);
+                
+                grad.addColorStop(0, `rgba(254, 240, 138, ${0.85 + pulseIntensity})`);
+                grad.addColorStop(0.3, `rgba(249, 115, 22, ${0.65 + pulseIntensity})`);
+                grad.addColorStop(0.7, 'rgba(234, 88, 12, 0.2)');
+                grad.addColorStop(1, 'rgba(234, 88, 12, 0)');
+
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = 'rgba(251, 146, 60, 0.85)';
+                ctx.beginPath();
+                ctx.ellipse(this.x, this.y, this.size * 0.55, this.size * 0.75, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (this.text && this.alpha > 0.25) {
+                    ctx.font = '10px Montserrat';
+                    ctx.fillStyle = `rgba(254, 240, 138, ${this.alpha * 0.8})`;
+                    ctx.fillText(this.text, this.x + this.size + 6, this.y + 3);
+                }
+                ctx.restore();
+            }
+        }
+
+        class ShootingStar {
+            constructor(x, y) {
+                this.x = x || Math.random() * canvas.width * 0.6;
+                this.y = y || Math.random() * canvas.height * 0.3;
+                this.length = Math.random() * 70 + 40;
+                this.speed = Math.random() * 3 + 6;
+                this.alpha = 1;
+                this.angle = Math.PI / 6 + Math.random() * (Math.PI / 12);
+            }
+            update() {
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+                this.alpha -= 0.025;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                const grad = ctx.createLinearGradient(
+                    this.x, this.y, 
+                    this.x - Math.cos(this.angle) * this.length, 
+                    this.y - Math.sin(this.angle) * this.length
+                );
+                grad.addColorStop(0, 'rgba(254, 243, 199, 0.9)');
+                grad.addColorStop(0.2, 'rgba(245, 158, 11, 0.35)');
+                grad.addColorStop(1, 'rgba(147, 51, 234, 0)');
+
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 1.2;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - Math.cos(this.angle) * this.length, this.y - Math.sin(this.angle) * this.length);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 9500);
+            for (let i = 0; i < count; i++) stars.push(new Star());
+        }
+
+        window.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT' || e.target.closest('section')) return;
+            handleVectorSpawn(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 0) {
+                const t = e.touches[0];
+                if (t.target.tagName === 'BUTTON' || t.target.tagName === 'INPUT' || t.target.closest('section')) return;
+                handleVectorSpawn(t.clientX, t.clientY);
+            }
+        });
+
+        function handleVectorSpawn(clientX, clientY) {
+            shootingStars.push(new ShootingStar(clientX, clientY));
+            const noteFreq = 380 + (1 - (clientY / window.innerHeight)) * 550;
+            playChime(noteFreq, 'sine', 1.8, 0.06);
+
+            if (lanterns.length < 14) {
+                const signs = ["👑", "✨", "💫", "🤍", "🌸"];
+                const sym = signs[Math.floor(Math.random() * signs.length)];
+                const interactiveLantern = new Lantern(sym);
+                interactiveLantern.x = clientX;
+                interactiveLantern.y = clientY + 30;
+                lanterns.push(interactiveLantern);
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(3, 0, 8, 0.25)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            stars.forEach(s => { s.update(); s.draw(); });
+            lanterns = lanterns.filter(l => l.alpha > 0);
+            lanterns.forEach(l => { l.update(); l.draw(); });
+            shootingStars = shootingStars.filter(s => s.alpha > 0);
+            shootingStars.forEach(s => { s.update(); s.draw(); });
+
+            if (Math.random() < 0.0025) shootingStars.push(new ShootingStar());
+            if (Math.random() < 0.005 && lanterns.length < 16) lanterns.push(new Lantern(""));
+
+            requestAnimationFrame(animate);
+        }
+
+        // 4. SEQUENCER CONTROLLERS (Dynamic Transition Engineering)
+        function beginJourney() {
+            initAudio();
+            playChime(261.63, 'triangle', 3.5, 0.12);
+
+            const landingSection = document.getElementById('act-landing');
+            const storySection = document.getElementById('act-story');
+
+            landingSection.classList.add('hidden-cinematic');
+            setTimeout(() => {
+                landingSection.style.display = 'none';
+                storySection.style.display = 'flex';
+                setTimeout(() => {
+                    storySection.classList.remove('hidden', 'opacity-0', 'translate-y-6');
+                    renderStorySegment();
+                }, 80);
+            }, 1000);
+        }
+
+        function renderStorySegment() {
+            const displayDiv = document.getElementById('story-display');
+            const subtitleDiv = document.getElementById('story-subtitle');
+            const nextBtn = document.getElementById('story-next-btn');
+
+            displayDiv.style.opacity = '0';
+            subtitleDiv.style.opacity = '0';
+            nextBtn.style.opacity = '0';
+
+            setTimeout(() => {
+                const data = storySegments[currentStoryIndex];
+                displayDiv.innerText = data.text;
+                subtitleDiv.innerText = data.subtitle;
+
+                const frequencies = [261.63, 329.63, 392.00, 523.25];
+                playChime(frequencies[currentStoryIndex], 'sine', 3.5, 0.1);
+
+                displayDiv.style.opacity = '1';
+                setTimeout(() => {
+                    subtitleDiv.style.opacity = '1';
+                    setTimeout(() => { nextBtn.style.opacity = '1'; }, 1200);
+                }, 1000);
+            }, 1000);
+        }
+
+        function nextStorySegment() {
+            currentStoryIndex++;
+            if (currentStoryIndex < storySegments.length) {
+                renderStorySegment();
+            } else {
+                buildInteractiveDashboard();
+            }
+        }
+
+        function buildInteractiveDashboard() {
+            const storySection = document.getElementById('act-story');
+            const interactiveSection = document.getElementById('act-interactive');
+
+            storySection.classList.add('hidden-cinematic');
+            setTimeout(() => {
+                storySection.style.display = 'none';
+                interactiveSection.style.display = 'grid';
+                setTimeout(() => {
+                    interactiveSection.classList.remove('hidden', 'opacity-0', 'translate-y-6');
+                    
+                    setTimeout(() => {
+                        const card = document.getElementById('portrait-card');
+                        card.classList.remove('opacity-0', 'translate-y-4');
+                        
+                        playChime(392.00, 'sine', 2.5, 0.08);
+                        setTimeout(() => playChime(523.25, 'sine', 3, 0.06), 150);
+                        setTimeout(() => playChime(659.25, 'sine', 3.5, 0.04), 300);
+                        
+                        // FIXED: Adjusted to customized notification string
+                        showNotification("");
+                    }, 600);
+                }, 80);
+            }, 1000);
+
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => { shootingStars.push(new ShootingStar()); }, i * 250);
+            }
+        }
+
+        // 5. INTERACTIVE FUNCTION MATRIX
+        function setPresetWish(text) {
+            document.getElementById('wish-input').value = text;
+            playChime(440.00, 'sine', 1.2, 0.08);
+        }
+
+        function releaseLanternFromInput() {
+            const input = document.getElementById('wish-input');
+            const val = input.value.trim();
+            
+            if (!val) {
+                showNotification("Please write something to release a wishing lantern.");
+                return;
+            }
+
+            const lantern = new Lantern(val);
+            lantern.x = canvas.width / 2 + (Math.random() * 160 - 80);
+            lantern.y = canvas.height + 40;
+            lanterns.push(lantern);
+
+            playChime(329.63, 'triangle', 2, 0.08);
+            setTimeout(() => playChime(440.00, 'sine', 2.5, 0.06), 150);
+
+            input.value = '';
+            showNotification("Your wish rises into Princess's sky!");
+        }
+
+        function showNotification(text) {
+            const banner = document.getElementById('notification-banner');
+            document.getElementById('notification-text').innerText = text;
+            banner.style.opacity = '1';
+            banner.style.transform = 'translate(-50%, 0) scale(1)';
+
+            setTimeout(() => {
+                banner.style.opacity = '0';
+                banner.style.transform = 'translate(-50%, 10px) scale(0.95)';
+            }, 3000);
+        }
+
+        function handleImageError() {
+            const img = document.getElementById('princess-image');
+            img.style.display = 'none';
+            const frame = img.parentElement;
+            const container = document.createElement('div');
+            container.className = "w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-purple-950/40 to-[#030008] p-6 text-center space-y-3";
+            container.innerHTML = `
+                <div class="w-14 h-14 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center animate-pulse">
+                    <span class="text-2xl text-yellow-300">👑</span>
+                </div>
+                <p class="font-cinzel text-yellow-100/90 text-xs tracking-widest font-semibold">Princess</p>
+                <p class="text-[10px] text-slate-500 font-light leading-relaxed">Celestial Birthday Portrait Frame</p>
+            `;
+            frame.appendChild(container);
+        }
+
+        // 7. INITIALIZATION HANDLERS
+        window.onload = function() {
+            resizeCanvas();
+            animate();
+        };
+        window.addEventListener('resize', resizeCanvas);
+    </script>
 </body>
 </html>
