@@ -9,12 +9,11 @@
     <!-- Google Fonts for Cinematic Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght=200;300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #030008;
-            /* FIXED: Allowed scrolling so the user can scroll up and down freely */
             overflow-y: auto;
         }
         .font-cinzel {
@@ -44,6 +43,13 @@
         .glow-rose-gold {
             box-shadow: 0 0 40px rgba(244, 180, 180, 0.15);
             border-color: rgba(244, 180, 180, 0.2);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        /* Dynamic Aura Ripple class triggered via JS audio pulses */
+        .audio-pulse-active {
+            box-shadow: 0 0 50px rgba(254, 240, 138, 0.35), 0 0 20px rgba(147, 51, 234, 0.2);
+            border-color: rgba(254, 240, 138, 0.5) !important;
+            transform: scale(1.01);
         }
         /* Animations */
         @keyframes slow-pan {
@@ -93,7 +99,7 @@
                 <p class="text-xs tracking-[0.4em] uppercase text-purple-400 font-semibold opacity-90">An Interactive Cinematic Experience</p>
                 <h1 class="text-4xl md:text-6xl font-cinzel font-bold text-yellow-100/90 tracking-wider glow-gold">Echoes of Midnight</h1>
                 <p class="text-sm md:text-base text-slate-400 font-light max-w-md mx-auto leading-relaxed px-4">
-                    A celestial journey crafted in honor of <span class="text-yellow-200/90 font-medium">Amakyewaa</span> on her special day. Please turn up your audio and find a quiet space.
+                    A celestial journey crafted in honor of <span class="text-yellow-200/90 font-medium">Princess</span> on her special day. Please turn up your audio and find a quiet space.
                 </p>
             </div>
 
@@ -135,7 +141,7 @@
                             <span class="text-[9px] uppercase text-purple-400 tracking-widest bg-purple-950/40 px-2 py-0.5 rounded border border-purple-900/30">Interactive</span>
                         </div>
                         <p class="text-xs text-slate-400 mb-6 leading-relaxed font-light">
-                            Type a warm blessing, memory, or wish , and watch it rise into the midnight sky ecosystem.
+                            Type a warm blessing, memory, or wish for Princess, and watch it rise into the midnight sky ecosystem.
                         </p>
                     </div>
 
@@ -174,14 +180,20 @@
                 </div>
             </div>
 
-            <!-- MIDDLE PANEL: The Portrait of Princess -->
+            <!-- MIDDLE PANEL: The Portrait of Princess with Stellar Readout -->
             <div class="lg:col-span-4 flex flex-col items-center justify-center relative">
+                <!-- FEATURE 2: NEW Stellar Coordinates Telemetry Node -->
+                <div class="mb-3 text-center opacity-80 select-none pointer-events-none">
+                    <p class="text-[9px] uppercase text-purple-400 tracking-[0.25em] font-light">
+                        Orbit State: 2026 // Constellation: <span class="text-yellow-200/90 font-medium">Princess</span> // Luminosity: Peak
+                    </p>
+                </div>
+
                 <div id="portrait-card" class="opacity-0 translate-y-4 duration-1000 ease-out transition-all bg-gradient-to-b from-purple-950/20 to-black/90 border glow-rose-gold p-3 rounded-2xl backdrop-blur-lg w-full max-w-[320px] relative overflow-hidden group">
                     <div class="absolute inset-0 shimmer-bg opacity-20 pointer-events-none rounded-2xl"></div>
                     
                     <!-- Portrait Frame -->
                     <div class="relative rounded-xl overflow-hidden aspect-[4/5] border border-white/5 shadow-inner bg-purple-950/10">
-                        <!-- UPDATED: Now points permanently to image.jpg -->
                         <img id="princess-image" src="image.jpg" alt="Princess" class="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-103" onerror="handleImageError()">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
                         <div class="absolute bottom-4 left-4 right-4 text-center">
@@ -241,7 +253,7 @@
 
     <!-- INTERACTIVE ENGINE LOGIC -->
     <script>
-        // 1. SCENARIO PROFILE CONFIGURATION (UPDATED TO CHOSEN POETIC SCRIPT)
+        // 1. SCENARIO PROFILE CONFIGURATION
         const storySegments = [
             {
                 text: "The universe keeps turning, rewriting the stars and shifting our paths.",
@@ -273,6 +285,17 @@
             startAmbientSequencer();
         }
 
+        // FEATURE 3: Audio Aura Border Pulse linkage
+        function triggerAuraPulse() {
+            const card = document.getElementById('portrait-card');
+            if (card && !card.classList.contains('opacity-0')) {
+                card.classList.add('audio-pulse-active');
+                setTimeout(() => {
+                    card.classList.remove('audio-pulse-active');
+                }, 450);
+            }
+        }
+
         function playChime(frequency, type = 'sine', duration = 2.5, gainVal = 0.12) {
             if (!audioCtx || isAudioMuted) return;
             try {
@@ -299,6 +322,9 @@
 
                 osc.start(audioCtx.currentTime);
                 osc.stop(audioCtx.currentTime + duration);
+
+                // Run visual flash alongside audio triggers
+                triggerAuraPulse();
             } catch (error) {
                 console.error("Audio Synthesis Interruption: ", error);
             }
@@ -349,6 +375,9 @@
         const canvas = document.getElementById('ambientCanvas');
         const ctx = canvas.getContext('2d');
         let stars = [], lanterns = [], shootingStars = [];
+        
+        // FEATURE 1: Constellation tracking arrays
+        let tapNodes = []; 
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -487,6 +516,9 @@
             const noteFreq = 380 + (1 - (clientY / window.innerHeight)) * 550;
             playChime(noteFreq, 'sine', 1.8, 0.06);
 
+            // FEATURE 1: Add tap point to node array for drawing constellations
+            tapNodes.push({ x: clientX, y: clientY, alpha: 1.0, created: Date.now() });
+
             if (lanterns.length < 14) {
                 const signs = ["👑", "✨", "💫", "🤍", "🌸"];
                 const sym = signs[Math.floor(Math.random() * signs.length)];
@@ -497,11 +529,59 @@
             }
         }
 
+        // FEATURE 1: Function to compute lines and render fading constellation vectors
+        function drawConstellations() {
+            const maxDistance = 180;
+            const lifeSpan = 5000; // 5 seconds lifespan
+            const now = Date.now();
+
+            // Filter old points
+            tapNodes = tapNodes.filter(node => now - node.created < lifeSpan);
+
+            // Update fading intensity
+            tapNodes.forEach(node => {
+                node.alpha = 1 - (now - node.created) / lifeSpan;
+            });
+
+            // Geometric calculation to tie close paths together
+            ctx.save();
+            for (let i = 0; i < tapNodes.length; i++) {
+                for (let j = i + 1; j < tapNodes.length; j++) {
+                    const dx = tapNodes[i].x - tapNodes[j].x;
+                    const dy = tapNodes[i].y - tapNodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < maxDistance) {
+                        const sharedAlpha = Math.min(tapNodes[i].alpha, tapNodes[j].alpha) * (1 - dist / maxDistance);
+                        ctx.strokeStyle = `rgba(254, 240, 138, ${sharedAlpha * 0.25})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.beginPath();
+                        ctx.moveTo(tapNodes[i].x, tapNodes[i].y);
+                        ctx.lineTo(tapNodes[j].x, tapNodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            // Draw small custom nexus vertices
+            tapNodes.forEach(node => {
+                ctx.fillStyle = `rgba(254, 240, 138, ${node.alpha * 0.4})`;
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.restore();
+        }
+
         function animate() {
             ctx.fillStyle = 'rgba(3, 0, 8, 0.25)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             stars.forEach(s => { s.update(); s.draw(); });
+            
+            // FEATURE 1: Render background geometric networks
+            drawConstellations();
+
             lanterns = lanterns.filter(l => l.alpha > 0);
             lanterns.forEach(l => { l.update(); l.draw(); });
             shootingStars = shootingStars.filter(s => s.alpha > 0);
@@ -585,8 +665,7 @@
                         setTimeout(() => playChime(523.25, 'sine', 3, 0.06), 150);
                         setTimeout(() => playChime(659.25, 'sine', 3.5, 0.04), 300);
                         
-                        // FIXED: Adjusted to customized notification string
-                        showNotification("");
+                        showNotification("Her portrait has faded in 🕯️");
                     }, 600);
                 }, 80);
             }, 1000);
