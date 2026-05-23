@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Princess</title>
+    <title></title> Happy Birthday Princess</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts for Cinematic Typography -->
@@ -103,8 +103,6 @@
                 </p>
             </div>
 
-        
-
             <!-- Cinematic Audio Play Button -->
             <button onclick="beginJourney()" class="group relative px-8 py-4 bg-purple-950/20 border border-yellow-500/20 rounded-full overflow-hidden transition-all duration-500 hover:border-yellow-400/60 hover:bg-purple-900/30 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] active:scale-98">
                 <span class="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
@@ -143,7 +141,7 @@
                             <span class="text-[9px] uppercase text-purple-400 tracking-widest bg-purple-950/40 px-2 py-0.5 rounded border border-purple-900/30">Interactive</span>
                         </div>
                         <p class="text-xs text-slate-400 mb-6 leading-relaxed font-light">
-                            Type a warm blessing, memory, or wish , and watch it rise into the midnight sky.
+                            Type a warm blessing, memory, or wish , and watch it rise into the midnight sky ecosystem.
                         </p>
                     </div>
 
@@ -162,33 +160,22 @@
                     </div>
                 </div>
 
-                <!-- NEW ADDITION: Live Sound Synthesizer & Audio Engine Node -->
-                <div class="bg-black/40 border border-purple-950/50 backdrop-blur-md p-4 rounded-xl flex flex-col space-y-3">
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex items-center gap-3">
-                            <button onclick="toggleAudio()" class="w-9 h-9 rounded-lg bg-purple-950/30 flex items-center justify-center border border-purple-900/30 text-yellow-500/80 hover:text-yellow-400 transition-colors">
-                                <svg id="mute-icon-on" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75V5.25L7.75 9H4.5v6h3.25L12 18.75z" /></svg>
-                                <svg id="mute-icon-off" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
-                            </button>
-                            <div>
-                                <p class="text-xs font-medium text-slate-300">Ambient Music Engine</p>
-                                <p id="current-soundscape-label" class="text-[10px] text-slate-500 font-light">Live-synthesizing: Deep Space Chimes</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <button onclick="playChime(329.63)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">A</button>
-                            <button onclick="playChime(392.00)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">P</button>
-                            <button onclick="playChime(440.00)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">A</button>
+                <!-- Live Sound Synthesizer Node -->
+                <div class="bg-black/40 border border-purple-950/50 backdrop-blur-md p-4 rounded-xl flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleAudio()" class="w-9 h-9 rounded-lg bg-purple-950/30 flex items-center justify-center border border-purple-900/30 text-yellow-500/80 hover:text-yellow-400 transition-colors">
+                            <svg id="mute-icon-on" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75V5.25L7.75 9H4.5v6h3.25L12 18.75z" /></svg>
+                            <svg id="mute-icon-off" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                        </button>
+                        <div>
+                            <p class="text-xs font-medium text-slate-300">Ambient Music Engine</p>
+                            <p class="text-[10px] text-slate-500 font-light">Live-synthesizing celestial chimes</p>
                         </div>
                     </div>
-                    
-                    <!-- Soundscape Synthesizer Engine Switcher -->
-                    <div class="pt-2 border-t border-purple-950/40 flex items-center justify-between">
-                        <span class="text-[9px] uppercase tracking-wider text-slate-500">Acoustic Aura:</span>
-                        <div class="flex gap-1">
-                            <button id="btn-scape-0" onclick="changeSoundscape(0)" class="text-[9px] bg-purple-950/40 border border-yellow-500/30 text-yellow-200 px-2 py-0.5 rounded transition-all">Chimes</button>
-                            <button id="btn-scape-1" onclick="changeSoundscape(1)" class="text-[9px] bg-purple-950/10 border border-purple-900/30 text-slate-400 px-2 py-0.5 rounded transition-all">Stellar Wind</button>
-                        </div>
+                    <div class="flex items-center gap-1">
+                        <button onclick="playChime(329.63)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">A</button>
+                        <button onclick="playChime(392.00)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">P</button>
+                        <button onclick="playChime(440.00)" class="w-7 h-7 rounded bg-purple-950/20 border border-purple-900/40 hover:bg-purple-900/40 text-[10px] text-yellow-100/70 flex items-center justify-center transition-colors">A</button>
                     </div>
                 </div>
             </div>
@@ -198,7 +185,7 @@
                 <!-- FEATURE 2: NEW Stellar Coordinates Telemetry Node -->
                 <div class="mb-3 text-center opacity-80 select-none pointer-events-none">
                     <p class="text-[9px] uppercase text-purple-400 tracking-[0.25em] font-light">
-                         <span class="text-yellow-200/90 font-medium">Princess</span> // Luminosity: Peak
+                        
                     </p>
                 </div>
 
@@ -261,7 +248,7 @@
 
     <!-- GLOBAL APPARATUS FOOTER -->
     <footer class="relative z-10 w-full text-center py-6 border-t border-purple-950/20 backdrop-blur-xs bg-black/10 text-[9px] text-slate-600 tracking-[0.25em] font-light">
-        <p> tap empty space to forge star systems.</p>
+        <p>Tap empty sky coordinates to spawn cascading shooting stars.</p>
     </footer>
 
     <!-- INTERACTIVE ENGINE LOGIC -->
@@ -291,7 +278,6 @@
         let audioCtx = null;
         let isAudioMuted = false;
         let ambientSequenceTimer = null;
-        let currentSoundscape = 0; // 0 = Chimes, 1 = Stellar Wind
 
         function initAudio() {
             if (audioCtx) return;
@@ -299,7 +285,7 @@
             startAmbientSequencer();
         }
 
-        // Audio Aura Border Pulse linkage
+        // FEATURE 3: Audio Aura Border Pulse linkage
         function triggerAuraPulse() {
             const card = document.getElementById('portrait-card');
             if (card && !card.classList.contains('opacity-0')) {
@@ -328,8 +314,7 @@
                 osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
 
                 filter.type = 'lowpass';
-                // Adjust filter frequency based on chosen soundscape for distinct ambient feelings
-                filter.frequency.setValueAtTime(currentSoundscape === 1 ? 600 : 1800, audioCtx.currentTime);
+                filter.frequency.setValueAtTime(1800, audioCtx.currentTime);
 
                 gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
                 gainNode.gain.linearRampToValueAtTime(gainVal, audioCtx.currentTime + 0.04);
@@ -338,6 +323,7 @@
                 osc.start(audioCtx.currentTime);
                 osc.stop(audioCtx.currentTime + duration);
 
+                // Run visual flash alongside audio triggers
                 triggerAuraPulse();
             } catch (error) {
                 console.error("Audio Synthesis Interruption: ", error);
@@ -345,14 +331,11 @@
         }
 
         function startAmbientSequencer() {
-            const chimeChords = [
+            const chordNotes = [
                 [130.81, 196.00, 246.94, 329.63], 
                 [146.83, 220.00, 293.66, 349.23], 
-                [110.07, 220.00, 277.18, 440.00]
-            ];
-            const windChords = [
-                [65.41, 98.00, 130.81, 164.81],
-                [73.42, 110.00, 146.83, 174.61]
+                [110.07, 220.00, 277.18, 440.00], 
+                [130.81, 196.00, 261.63, 392.00]
             ];
             let chordIndex = 0;
 
@@ -361,47 +344,21 @@
                     ambientSequenceTimer = setTimeout(playChordSequence, 6000);
                     return;
                 }
-                
-                const activeChordSet = currentSoundscape === 0 ? chimeChords : windChords;
-                const currentChord = activeChordSet[chordIndex % activeChordSet.length];
-                const waveType = currentSoundscape === 0 ? 'sine' : 'triangle';
-                const duration = currentSoundscape === 0 ? 4 : 6;
-                const gain = currentSoundscape === 0 ? 0.03 : 0.02;
-
+                const currentChord = chordNotes[chordIndex];
                 currentChord.forEach((freq, index) => {
                     setTimeout(() => {
-                        playChime(freq, waveType, duration, gain);
-                        if (currentSoundscape === 0 && Math.random() > 0.6) {
+                        playChime(freq, 'triangle', 4, 0.03);
+                        if (Math.random() > 0.6) {
                             setTimeout(() => {
                                 playChime(freq * 2, 'sine', 3, 0.015);
                             }, 400);
                         }
-                    }, index * (currentSoundscape === 0 ? 350 : 600));
+                    }, index * 350);
                 });
-                
-                chordIndex = (chordIndex + 1) % activeChordSet.length;
-                ambientSequenceTimer = setTimeout(playChordSequence, currentSoundscape === 0 ? 8000 : 10000);
+                chordIndex = (chordIndex + 1) % chordNotes.length;
+                ambientSequenceTimer = setTimeout(playChordSequence, 8000);
             }
             playChordSequence();
-        }
-
-        function changeSoundscape(index) {
-            currentSoundscape = index;
-            const label = document.getElementById('current-soundscape-label');
-            const btn0 = document.getElementById('btn-scape-0');
-            const btn1 = document.getElementById('btn-scape-1');
-
-            if(index === 0) {
-                label.innerText = "Live-synthesizing: Deep Space Chimes";
-                btn0.className = "text-[9px] bg-purple-950/40 border border-yellow-500/30 text-yellow-200 px-2 py-0.5 rounded transition-all";
-                btn1.className = "text-[9px] bg-purple-950/10 border border-purple-900/30 text-slate-400 px-2 py-0.5 rounded transition-all";
-                playChime(440.00, 'sine', 2, 0.05);
-            } else {
-                label.innerText = "Live-synthesizing: Low Resonance Wind";
-                btn0.className = "text-[9px] bg-purple-950/10 border border-purple-900/30 text-slate-400 px-2 py-0.5 rounded transition-all";
-                btn1.className = "text-[9px] bg-purple-950/40 border border-yellow-500/30 text-yellow-200 px-2 py-0.5 rounded transition-all";
-                playChime(110.00, 'triangle', 4, 0.04);
-            }
         }
 
         function toggleAudio() {
@@ -418,8 +375,9 @@
         const canvas = document.getElementById('ambientCanvas');
         const ctx = canvas.getContext('2d');
         let stars = [], lanterns = [], shootingStars = [];
+        
+        // FEATURE 1: Constellation tracking arrays
         let tapNodes = []; 
-        let cursorParticles = []; // Particle buffer for trailing stardust
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -441,30 +399,6 @@
             }
             draw() {
                 ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        // NEW ADDITION: High performance trailing dust architecture
-        class StardustParticle {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.vx = (Math.random() - 0.5) * 0.6;
-                this.vy = (Math.random() - 0.5) * 0.6 - 0.2; // drifting upwards softly
-                this.alpha = 1.0;
-                this.decay = 0.015 + Math.random() * 0.015;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.alpha -= this.decay;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(254, 240, 138, ${this.alpha * 0.6})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -564,19 +498,6 @@
             for (let i = 0; i < count; i++) stars.push(new Star());
         }
 
-        // Capture mouse movement for interactive stardust trail
-        window.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.4) { // Throttled to keep look clean and fast
-                cursorParticles.push(new StardustParticle(e.clientX, e.clientY));
-            }
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0 && Math.random() < 0.4) {
-                cursorParticles.push(new StardustParticle(e.touches[0].clientX, e.touches[0].clientY));
-            }
-        });
-
         window.addEventListener('mousedown', (e) => {
             if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT' || e.target.closest('section')) return;
             handleVectorSpawn(e.clientX, e.clientY);
@@ -595,6 +516,7 @@
             const noteFreq = 380 + (1 - (clientY / window.innerHeight)) * 550;
             playChime(noteFreq, 'sine', 1.8, 0.06);
 
+            // FEATURE 1: Add tap point to node array for drawing constellations
             tapNodes.push({ x: clientX, y: clientY, alpha: 1.0, created: Date.now() });
 
             if (lanterns.length < 14) {
@@ -607,17 +529,21 @@
             }
         }
 
+        // FEATURE 1: Function to compute lines and render fading constellation vectors
         function drawConstellations() {
             const maxDistance = 180;
-            const lifeSpan = 5000;
+            const lifeSpan = 5000; // 5 seconds lifespan
             const now = Date.now();
 
+            // Filter old points
             tapNodes = tapNodes.filter(node => now - node.created < lifeSpan);
 
+            // Update fading intensity
             tapNodes.forEach(node => {
                 node.alpha = 1 - (now - node.created) / lifeSpan;
             });
 
+            // Geometric calculation to tie close paths together
             ctx.save();
             for (let i = 0; i < tapNodes.length; i++) {
                 for (let j = i + 1; j < tapNodes.length; j++) {
@@ -637,6 +563,7 @@
                 }
             }
             
+            // Draw small custom nexus vertices
             tapNodes.forEach(node => {
                 ctx.fillStyle = `rgba(254, 240, 138, ${node.alpha * 0.4})`;
                 ctx.beginPath();
@@ -652,11 +579,8 @@
 
             stars.forEach(s => { s.update(); s.draw(); });
             
+            // FEATURE 1: Render background geometric networks
             drawConstellations();
-
-            // Render cursor trailing stardust vectors
-            cursorParticles = cursorParticles.filter(p => p.alpha > 0);
-            cursorParticles.forEach(p => { p.update(); p.draw(); });
 
             lanterns = lanterns.filter(l => l.alpha > 0);
             lanterns.forEach(l => { l.update(); l.draw(); });
@@ -669,24 +593,7 @@
             requestAnimationFrame(animate);
         }
 
-        // 4. SEQUENCER CONTROLLERS & NEW COUNTDOWN CLOCK
-        function updateMidnightClock() {
-            const now = new Date();
-            // Simulates time remaining until the next celestial turning hour (Midnight)
-            const midnight = new Date();
-            midnight.setHours(24, 0, 0, 0);
-
-            const diff = midnight - now;
-            const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
-            const minutes = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-            const seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-
-            const interfaceString = `${hours}h : ${minutes}m : ${seconds}s`;
-            
-            const landingClock = document.getElementById('landing-countdown');
-            if (landingClock) landingClock.innerText = interfaceString;
-        }
-
+        // 4. SEQUENCER CONTROLLERS (Dynamic Transition Engineering)
         function beginJourney() {
             initAudio();
             playChime(261.63, 'triangle', 3.5, 0.12);
@@ -758,7 +665,7 @@
                         setTimeout(() => playChime(523.25, 'sine', 3, 0.06), 150);
                         setTimeout(() => playChime(659.25, 'sine', 3.5, 0.04), 300);
                         
-                        showNotification("Her portrait has faded in 🕯️");
+                        showNotification("🕯️");
                     }, 600);
                 }, 80);
             }, 1000);
@@ -827,8 +734,6 @@
         window.onload = function() {
             resizeCanvas();
             animate();
-            setInterval(updateMidnightClock, 1000);
-            updateMidnightClock();
         };
         window.addEventListener('resize', resizeCanvas);
     </script>
